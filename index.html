@@ -174,10 +174,10 @@
   </div>
 
   <!-- ===== Gold Price Calculator (LEFT) ===== -->
-  <div class="gold-container">
-    <button class="toggle" id="goldToggle" title="Open Gold Calculator">
-      <span class="toggle-emoji">🧮</span><span class="toggle-text">Gold Calculator</span>
-    </button>
+  <button class="threeway-toggle" id="threewayToggle" title="Open Gold Calculator">
+  <span class="toggle-emoji">💎</span>
+  <span class="toggle-text">Gold Calculator</span>
+</button>
 
     <div class="box left" id="goldBox" role="dialog" aria-modal="true" aria-label="Gold Calculator">
       <div class="box-header">
@@ -236,10 +236,15 @@
   </div>
 
   <!-- ===== Layaway Calculator (RIGHT) ===== -->
-  <div class="widget-container">
-    <button class="toggle" id="layToggle" title="Open Layaway Calculator">
-      <span class="toggle-emoji">💰</span><span class="toggle-text">Layaway Calculator</span>
-    </button>
+ <!-- Layaway Calculator Button (Gold Bar) -->
+<button class="widget-toggle" id="widgetToggle" title="Open Layaway Calculator">
+  <!-- Gold bar SVG -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 640 512" fill="#FFD700">
+    <path d="M480 160H160L64 352h512L480 160zM0 416h640v64H0V416z"/>
+  </svg>
+  <span class="toggle-text">Layaway Calculator</span>
+</button>
+
 
     <div class="box right" id="layBox" role="dialog" aria-modal="true" aria-label="Layaway Calculator">
       <div class="box-header">
