@@ -577,13 +577,13 @@
       class Particle{
         constructor(first=false){ this.reset(first); }
         reset(first=false){
-          this.x = Math.random()*canvas.width;
-          this.y = first ? Math.random()*canvas.height : -10;
-          this.r = Math.random()*2 + 0.8;
-          this.vx = Math.random()*2 - 1;
-          this.vy = Math.random()*2 + 1.2;   // fall speed
-          this.a = Math.random()*0.5 + 0.3;  // base opacity
-          this.t = Math.random()*Math.PI*2;
+          this.x = Math.random() * canvas.width;
+this.y = first ? Math.random() * canvas.height : -10;
+this.r = Math.random() * 1.5 + 0.5;   // smaller radius (was 2 + 0.8)
+this.vx = Math.random() * 1 - 0.5;    // gentler side drift (was 2 - 1)
+this.vy = Math.random() * 1 + 0.4;    // slower fall (was 2 + 1.2)
+this.a  = Math.random() * 0.4 + 0.2;  // softer opacity (was 0.5 + 0.3)
+this.t  = Math.random() * Math.PI * 2;
         }
         step(){
           this.x += this.vx; this.y += this.vy; this.t += 0.05;
