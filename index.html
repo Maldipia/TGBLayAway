@@ -259,6 +259,23 @@
             font-size: 1.05em;
         }
         
+        .fee-table-container {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+        
+        .footer-section {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(0, 0, 0, 0.6) 100%);
+            padding: 25px 20px;
+            border-top: 2px solid rgba(212, 175, 55, 0.3);
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
+        }
+        
         .demo-container {
             text-align: center;
             color: #d4af37;
@@ -300,50 +317,6 @@
                     <button class="quick-btn" data-price="30000">₱30K</button>
                     <button class="quick-btn" data-price="50000">₱50K</button>
                     <button class="quick-btn" data-price="100000">₱100K</button>
-                </div>
-                
-                <!-- Service Fee Benefits Section -->
-                <div class="benefits-section" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(0, 0, 0, 0.4) 100%); border-radius: 15px; padding: 20px; margin-top: 20px; border: 1px solid rgba(212, 175, 55, 0.3);">
-                    <div class="section-title" style="color: #d4af37; font-size: 1em; font-weight: bold; text-align: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid rgba(212, 175, 55, 0.3);">
-                        SERVICE FEE INCLUSIONS
-                    </div>
-                    <p style="color: rgba(244, 228, 193, 0.9); font-size: 0.8em; text-align: center; margin-bottom: 15px; font-style: italic;">
-                        The layaway service fee is a one-time, non-refundable charge that covers:
-                    </p>
-                    
-                    <div class="benefit-category" style="margin-bottom: 15px;">
-                        <h4 style="color: #d4af37; font-size: 0.9em; margin-bottom: 8px; font-weight: bold;">MERCHANDISE MANAGEMENT</h4>
-                        <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="color: #f4e4c1; font-size: 0.75em; padding: 4px 0; padding-left: 15px;">• <strong style="color: rgba(212, 175, 55, 0.9);">Inventory Reservation</strong> - Exclusive hold on selected merchandise</li>
-                            <li style="color: #f4e4c1; font-size: 0.75em; padding: 4px 0; padding-left: 15px;">• <strong style="color: rgba(212, 175, 55, 0.9);">Price Lock Guarantee</strong> - Protection against price fluctuations</li>
-                            <li style="color: #f4e4c1; font-size: 0.75em; padding: 4px 0; padding-left: 15px;">• <strong style="color: rgba(212, 175, 55, 0.9);">Quality Assurance</strong> - Regular inspection and proper storage protocols</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="benefit-category" style="margin-bottom: 15px;">
-                        <h4 style="color: #d4af37; font-size: 0.9em; margin-bottom: 8px; font-weight: bold;">ACCOUNT ADMINISTRATION</h4>
-                        <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="color: #f4e4c1; font-size: 0.75em; padding: 4px 0; padding-left: 15px;">• <strong style="color: rgba(212, 175, 55, 0.9);">Payment Processing</strong> - Multiple payment channels and methods</li>
-                            <li style="color: #f4e4c1; font-size: 0.75em; padding: 4px 0; padding-left: 15px;">• <strong style="color: rgba(212, 175, 55, 0.9);">Account Monitoring</strong> - Real-time balance tracking and record management</li>
-                            <li style="color: #f4e4c1; font-size: 0.75em; padding: 4px 0; padding-left: 15px;">• <strong style="color: rgba(212, 175, 55, 0.9);">Documentation</strong> - Official receipts and payment history records</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="benefit-category" style="margin-bottom: 15px;">
-                        <h4 style="color: #d4af37; font-size: 0.9em; margin-bottom: 8px; font-weight: bold;">CUSTOMER SERVICES</h4>
-                        <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="color: #f4e4c1; font-size: 0.75em; padding: 4px 0; padding-left: 15px;">• <strong style="color: rgba(212, 175, 55, 0.9);">Flexible Payment Terms</strong> - Accept partial payments without minimum amounts</li>
-                            <li style="color: #f4e4c1; font-size: 0.75em; padding: 4px 0; padding-left: 15px;">• <strong style="color: rgba(212, 175, 55, 0.9);">Grace Period Provision</strong> - 60-day storage fee exemption</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="benefit-category">
-                        <h4 style="color: #d4af37; font-size: 0.9em; margin-bottom: 8px; font-weight: bold;">RISK MITIGATION</h4>
-                        <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="color: #f4e4c1; font-size: 0.75em; padding: 4px 0; padding-left: 15px;">• <strong style="color: rgba(212, 175, 55, 0.9);">Inventory Protection</strong> - Insurance against damage while in storage</li>
-                            <li style="color: #f4e4c1; font-size: 0.75em; padding: 4px 0; padding-left: 15px;">• <strong style="color: rgba(212, 175, 55, 0.9);">Extended Reservation</strong> - No forced cancellation timeline</li>
-                        </ul>
-                    </div>
                 </div>
                 
                 <div class="payment-section">
@@ -435,88 +408,147 @@
                     </div>
                 </div>
                 
-                <!-- Fee Table -->
-                <div class="fee-table-container" style="max-height: 200px; overflow-y: auto; margin-top: 20px; padding: 10px; background: rgba(0, 0, 0, 0.3); border-radius: 10px;">
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                <div class="fee-table-container">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px;">
                         <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱1K - ₱3K</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱5/day</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱150/mo</span>
                     </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px;">
                         <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱3K - ₱5K</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱10/day</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱300/mo</span>
                     </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px;">
                         <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱5K - ₱7.5K</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱15/day</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱450/mo</span>
                     </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px;">
                         <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱7.5K - ₱10K</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱25/day</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱750/mo</span>
                     </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px;">
                         <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱10K - ₱15K</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱30/day</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱900/mo</span>
                     </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px;">
                         <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱15K - ₱20K</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱45/day</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱1,350/mo</span>
                     </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px;">
                         <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱20K - ₱25K</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱60/day</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱1,800/mo</span>
                     </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px;">
                         <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱25K - ₱30K</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱75/day</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱2,250/mo</span>
                     </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px;">
                         <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱30K - ₱40K</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱90/day</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱2,700/mo</span>
                     </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px;">
                         <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱40K - ₱50K</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱120/day</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱3,600/mo</span>
                     </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px;">
                         <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱50K - ₱60K</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱150/day</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱4,500/mo</span>
                     </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
-                        <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱60K - ₱75K</span>
-                        <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱180/day</span>
-                        <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱5,400/mo</span>
-                    </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
-                        <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱75K - ₱90K</span>
-                        <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱225/day</span>
-                        <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱6,750/mo</span>
-                    </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
-                        <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱90K - ₱100K</span>
-                        <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱270/day</span>
-                        <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱8,100/mo</span>
-                    </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px;">
                         <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱100K - ₱200K</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱300/day</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱9,000/mo</span>
                     </div>
-                    <div class="fee-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px; cursor: pointer; transition: all 0.3s ease;">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px; margin-bottom: 5px; background: rgba(212, 175, 55, 0.02); border-radius: 5px;">
                         <span style="color: rgba(212, 175, 55, 0.9); font-weight: 600; font-size: 0.85em;">₱200K+</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱600/day</span>
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱18,000/mo</span>
                     </div>
+                </div>
+            </div>
+            
+            <!-- FOOTER SECTION - COMPLETELY OUTSIDE CALCULATOR-SECTION -->
+            <div class="footer-section">
+                <div style="color: #d4af37; font-size: 1em; font-weight: bold; text-align: center; margin-bottom: 10px;">
+                    🌟 Why Choose Layaway at The Gold Blessing?
+                </div>
+                <p style="color: rgba(244, 228, 193, 0.85); font-size: 0.75em; text-align: center; margin-bottom: 20px; line-height: 1.4;">
+                    At The Gold Blessing, layaway isn't just about paying in parts—it's about <strong style="color: #d4af37;">peace of mind, exclusivity, and luxury-level service</strong>. Here's what makes our layaway program truly golden:
+                </p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                    <div>
+                        <h5 style="color: #d4af37; font-size: 0.85em; margin-bottom: 8px;">✨ Merchandise Management</h5>
+                        <ul style="list-style: none; padding: 0; margin: 0 0 12px 0;">
+                            <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 3px 0; padding-left: 10px;">
+                                <strong style="color: rgba(212, 175, 55, 0.9);">Exclusive Reservation</strong> – Your chosen jewelry is held just for you.
+                            </li>
+                            <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 3px 0; padding-left: 10px;">
+                                <strong style="color: rgba(212, 175, 55, 0.9);">Price Lock Guarantee</strong> – Secure today's gold rate, shielded from market changes.
+                            </li>
+                            <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 3px 0; padding-left: 10px;">
+                                <strong style="color: rgba(212, 175, 55, 0.9);">Quality Assurance</strong> – Each piece is stored and inspected with utmost care.
+                            </li>
+                        </ul>
+                        
+                        <h5 style="color: #d4af37; font-size: 0.85em; margin-bottom: 8px;">💛 Customer Services</h5>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 3px 0; padding-left: 10px;">
+                                <strong style="color: rgba(212, 175, 55, 0.9);">Flexible Payments</strong> – Pay in partial amounts, no minimum required.
+                            </li>
+                            <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 3px 0; padding-left: 10px;">
+                                <strong style="color: rgba(212, 175, 55, 0.9);">Grace Period Privilege</strong> – Enjoy 60 days of free, secure storage.
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h5 style="color: #d4af37; font-size: 0.85em; margin-bottom: 8px;">📑 Account Administration</h5>
+                        <ul style="list-style: none; padding: 0; margin: 0 0 12px 0;">
+                            <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 3px 0; padding-left: 10px;">
+                                <strong style="color: rgba(212, 175, 55, 0.9);">Seamless Payment Processing</strong> – Multiple safe and convenient channels.
+                            </li>
+                            <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 3px 0; padding-left: 10px;">
+                                <strong style="color: rgba(212, 175, 55, 0.9);">Real-Time Monitoring</strong> – Track your balance and history anytime.
+                            </li>
+                            <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 3px 0; padding-left: 10px;">
+                                <strong style="color: rgba(212, 175, 55, 0.9);">Proper Documentation</strong> – Official receipts and records, every step of the way.
+                            </li>
+                        </ul>
+                        
+                        <h5 style="color: #d4af37; font-size: 0.85em; margin-bottom: 8px;">🛡 Risk Mitigation</h5>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 3px 0; padding-left: 10px;">
+                                <strong style="color: rgba(212, 175, 55, 0.9);">Protected Inventory</strong> – Insurance safeguards your piece while in storage.
+                            </li>
+                            <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 3px 0; padding-left: 10px;">
+                                <strong style="color: rgba(212, 175, 55, 0.9);">Extended Reservation</strong> – No strict cut-off—your dream piece waits for you.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(212, 175, 55, 0.1); border-radius: 10px; padding: 12px; margin: 15px 0; border: 1px solid rgba(212, 175, 55, 0.2);">
+                    <h5 style="color: #d4af37; font-size: 0.85em; margin-bottom: 8px; text-align: center;">🌹 The Gold Blessing Promise</h5>
+                    <p style="color: rgba(244, 228, 193, 0.85); font-size: 0.72em; text-align: center; line-height: 1.5; margin: 0;">
+                        Our layaway service fee is a <strong style="color: #d4af37;">one-time, non-refundable investment</strong> that ensures your jewelry journey is safe, flexible, and worry-free—because every client deserves the luxury of time.
+                    </p>
+                </div>
+                
+                <div style="text-align: center; padding-top: 10px; border-top: 1px solid rgba(212, 175, 55, 0.2);">
+                    <p style="color: #d4af37; font-size: 0.8em; font-weight: bold; margin: 0;">
+                        👉 Start your layaway today and let your dream jewelry be exclusively yours—on your terms.
+                    </p>
                 </div>
             </div>
         </div>
