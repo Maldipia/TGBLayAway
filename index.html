@@ -195,6 +195,111 @@
     }
   </style>
 </head>
+  <!-- ================== WHY CHOOSE LAYAWAY (FLOATING BUTTON + MODAL) ================== -->
+<style>
+  .benefits-container{
+    position: fixed;
+    left: 50%;
+    bottom: 170px; /* sits above Terms button */
+    transform: translateX(-50%);
+    z-index: 1000;
+  }
+  .toggle-benefits .toggle-text{ font-size:.85em; }
+  @media (max-width:520px){
+    .benefits-container{ bottom:150px; }
+  }
+</style>
+
+<div class="benefits-container">
+  <button class="toggle toggle-benefits" id="benefitsToggle" title="Why Choose Layaway">
+    <span class="toggle-emoji" aria-hidden="true">🌟</span>
+    <span class="toggle-text">Why Choose Layaway</span>
+  </button>
+
+  <div class="box center" id="benefitsBox" role="dialog" aria-modal="true" aria-label="Why Choose Layaway at The Gold Blessing">
+    <div class="box-header">
+      <button class="close-btn" id="benefitsClose" aria-label="Close">×</button>
+      <div class="box-title">🌟 Why Choose Layaway at The Gold Blessing?</div>
+    </div>
+
+    <div class="section">
+      <p style="color:rgba(244,228,193,.88); text-align:center; margin-bottom:16px;">
+        At <strong style="color:#d4af37;">The Gold Blessing</strong>, layaway isn’t just about paying in parts—it’s about <strong style="color:#d4af37;">peace of mind, exclusivity, and luxury-level service</strong>.
+        Here’s what makes our layaway program truly golden:
+      </p>
+
+      <!-- Merchandise -->
+      <div class="terms-sect-title">✨ Merchandise Management</div>
+      <ul class="terms-list">
+        <li>• <strong style="color:#d4af37;">Exclusive Reservation</strong> – Your chosen jewelry is held just for you.</li>
+        <li>• <strong style="color:#d4af37;">Price Lock Guarantee</strong> – Secure today’s gold rate, shielded from market changes.</li>
+        <li>• <strong style="color:#d4af37;">Quality Assurance</strong> – Stored and inspected with utmost care.</li>
+      </ul>
+
+      <!-- Customer -->
+      <div class="terms-sect-title">💛 Customer Services</div>
+      <ul class="terms-list">
+        <li>• <strong style="color:#d4af37;">Flexible Payments</strong> – Partial payments accepted.</li>
+        <li>• <strong style="color:#d4af37;">Grace Period Privilege</strong> – Enjoy 60 days of free, secure storage.</li>
+      </ul>
+
+      <!-- Account -->
+      <div class="terms-sect-title">📑 Account Administration</div>
+      <ul class="terms-list">
+        <li>• <strong style="color:#d4af37;">Seamless Processing</strong> – Multiple safe and convenient channels.</li>
+        <li>• <strong style="color:#d4af37;">Real-Time Monitoring</strong> – Track your balance and history anytime.</li>
+      </ul>
+
+      <!-- Risk -->
+      <div class="terms-sect-title">🛡 Risk Mitigation</div>
+      <ul class="terms-list">
+        <li>• <strong style="color:#d4af37;">Protected Inventory</strong> – Insurance safeguards your piece while in storage.</li>
+        <li>• <strong style="color:#d4af37;">Extended Reservation</strong> – No strict cut-off—your dream piece waits for you.</li>
+      </ul>
+
+      <!-- Peace of Mind -->
+      <div class="terms-sect-title">🕊 Peace of Mind</div>
+      <ul class="terms-list">
+        <li>• <strong style="color:#d4af37;">No Hidden Fees</strong> – Transparent terms, no surprises.</li>
+        <li>• <strong style="color:#d4af37;">Secure Handling</strong> – Every item stored in premium, insured vault conditions.</li>
+      </ul>
+
+      <!-- Added Warmth -->
+      <div class="terms-sect-title">🎁 Added Warmth</div>
+      <ul class="terms-list">
+        <li>• <strong style="color:#d4af37;">Surprise Perks</strong> – Occasional raffles, exclusive discounts, or freebies for loyal layaway clients.</li>
+        <li>• <strong style="color:#d4af37;">Celebration Ready</strong> – Option to have your jewelry gift-wrapped when fully paid.</li>
+      </ul>
+
+      <!-- Promise -->
+      <div class="terms-note">
+        🌹 <strong>The Gold Blessing Promise</strong><br><br>
+        Our layaway service fee is a <strong style="color:#d4af37;">one-time, non-refundable investment</strong> that ensures your jewelry journey is <strong style="color:#d4af37;">safe, flexible, and worry-free</strong>.<br><br>
+        👉 <strong>Start your layaway today</strong> and make your dream jewelry exclusively yours—on your terms.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Open/close handlers for Benefits modal
+  (function(){
+    const benefitsToggle = document.getElementById('benefitsToggle');
+    const benefitsBox    = document.getElementById('benefitsBox');
+    const benefitsClose  = document.getElementById('benefitsClose');
+
+    benefitsToggle.addEventListener('click', ()=>{
+      benefitsBox.classList.add('active');
+      benefitsToggle.style.display='none';
+    });
+    benefitsClose.addEventListener('click', ()=>{
+      benefitsBox.classList.remove('active');
+      benefitsToggle.style.display='inline-flex';
+    });
+  })();
+</script>
+<!-- ================== /WHY CHOOSE LAYAWAY ================== -->
+
 <body>
 
   <!-- ===== Shimmering Rotating Title + Big Diamond in Center ===== -->
