@@ -206,24 +206,23 @@
             color: #d4af37;
             font-size: 0.95em;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             text-align: center;
         }
         
         .payment-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
         }
         
         .payment-card {
             background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(45, 45, 45, 0.9) 100%);
             border: 2px solid rgba(212, 175, 55, 0.2);
             border-radius: 10px;
-            padding: 12px;
+            padding: 12px 10px;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-align: center;
         }
         
         .payment-card:hover {
@@ -239,20 +238,48 @@
         
         .payment-card h4 {
             color: #d4af37;
-            font-size: 0.9em;
-            margin-bottom: 5px;
-        }
-        
-        .payment-card .dp-text {
-            color: #f4e4c1;
-            font-size: 0.85em;
+            font-size: 1em;
+            margin-bottom: 10px;
+            text-align: center;
             font-weight: bold;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 6px;
         }
         
-        .payment-card .fee-text {
-            color: rgba(244, 228, 193, 0.7);
+        .card-details {
             font-size: 0.75em;
-            margin-top: 3px;
+        }
+        
+        .detail-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .detail-list li {
+            color: #f4e4c1;
+            font-size: 0.75em;
+            margin-bottom: 6px;
+            padding: 3px 0;
+        }
+        
+        .detail-list li strong {
+            color: rgba(212, 175, 55, 0.9);
+            font-weight: 600;
+            display: inline-block;
+            margin-right: 3px;
+        }
+        
+        .detail-list li.storage-highlight {
+            background: rgba(212, 175, 55, 0.15);
+            padding: 5px;
+            border-radius: 5px;
+            margin-top: 5px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .detail-list li.storage-highlight strong {
+            color: #d4af37;
         }
         
         /* Grace Period Notice */
