@@ -598,7 +598,7 @@
           ctx.fillStyle=g; ctx.beginPath(); ctx.arc(this.x,this.y,this.r*2.2,0,Math.PI*2); ctx.fill();
         }
       }
-      const particles = Array.from({length: 540}, ()=>new Particle(true)); // thinner gold rain
+      const particles = Array.from({length: 20}, ()=>new Particle(true)); // thinner gold rain
       (function loop(){
         ctx.clearRect(0,0,canvas.width,canvas.height);
         particles.forEach(p=>{ p.step(); p.draw(); });
