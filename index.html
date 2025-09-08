@@ -153,6 +153,144 @@
     }
   </style>
 </head>
+  <!-- ================== TERMS BUTTON (LOWER MIDDLE) + MODAL ================== -->
+<style>
+  /* container centered near bottom */
+  .terms-container{
+    position:fixed;
+    left:50%;
+    bottom:30px;
+    transform:translateX(-50%);
+    z-index:1000;
+  }
+  /* make the icon big, title small */
+  .toggle.toggle-doc {
+    gap:12px;
+    padding:10px 18px;
+  }
+  .toggle-doc .toggle-emoji svg{
+    width:36px; height:36px; display:block;
+    filter: drop-shadow(0 4px 12px rgba(212,175,55,.45));
+  }
+  .toggle-doc .toggle-text{
+    font-size:.8em; letter-spacing:.3px;
+  }
+  /* center modal variation */
+  .box.center{
+    left:50%;
+    transform:translateX(-50%);
+  }
+  /* list styling inside terms modal */
+  .terms-list{
+    list-style:none; padding-left:10px; margin:0;
+    color:rgba(244,228,193,.88);
+  }
+  .terms-list li{ padding:3px 0; }
+  .terms-sect-title{
+    color:#d4af37; font-weight:700; margin:12px 0 6px;
+  }
+  .terms-intro{
+    color:rgba(244,228,193,.88);
+    text-align:center; margin-bottom:12px;
+  }
+  .terms-note{
+    background:rgba(212,175,55,.1);
+    border:1px solid rgba(212,175,55,.2);
+    border-radius:10px; padding:12px; margin-top:12px;
+    color:rgba(244,228,193,.9);
+    text-align:center;
+  }
+</style>
+
+<div class="terms-container">
+  <button class="toggle toggle-doc" id="termsToggle" title="Open Layaway Terms">
+    <!-- Golden paper/document icon (SVG) -->
+    <span class="toggle-emoji" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="url(#goldGradient)">
+        <defs>
+          <linearGradient id="goldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"  stop-color="#f4e4c1"/>
+            <stop offset="50%" stop-color="#d4af37"/>
+            <stop offset="100%" stop-color="#8c6f26"/>
+          </linearGradient>
+        </defs>
+        <!-- document -->
+        <path d="M224 0H64C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160L224 0zM256 160V48l112 112H256zM80 272c0-8.8 7.2-16 16-16H288c8.8 0 16 7.2 16 16s-7.2 16-16 16H96c-8.8 0-16-7.2-16-16zm16 64H288c8.8 0 16 7.2 16 16s-7.2 16-16 16H96c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0-160H208c8.8 0 16 7.2 16 16s-7.2 16-16 16H96c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/>
+      </svg>
+    </span>
+    <span class="toggle-text">Layaway Terms</span>
+  </button>
+
+  <!-- Modal -->
+  <div class="box center" id="termsBox" role="dialog" aria-modal="true" aria-label="Layaway Terms & Conditions">
+    <div class="box-header">
+      <button class="close-btn" id="termsClose" aria-label="Close">×</button>
+      <div class="box-title" style="font-size:1.05em;">📜 Layaway Terms & Conditions</div>
+    </div>
+
+    <div class="section">
+      <p class="terms-intro">
+        At <strong style="color:#d4af37;">The Gold Blessing</strong>, we believe in <strong style="color:#d4af37;">clarity, flexibility, and trust</strong>.
+        Here are the guidelines that safeguard your layaway journey:
+      </p>
+
+      <div class="terms-sect-title">💰 Payment Terms</div>
+      <ul class="terms-list">
+        <li>• The service fee is non-refundable</li>
+        <li>• 60-day grace period from contract date</li>
+        <li>• Daily storage fees apply after grace period</li>
+        <li>• Partial payments minimum ₱500</li>
+      </ul>
+
+      <div class="terms-sect-title">⚠️ Default & Abandonment</div>
+      <ul class="terms-list">
+        <li>• Storage fees equal to item value</li>
+        <li>• No payment for 3 consecutive months</li>
+        <li>• Customer cancellation request</li>
+        <li>• All deposits forfeited upon abandonment</li>
+        <li>• Abandoned merchandise returns to available inventory</li>
+      </ul>
+
+      <div class="terms-sect-title">👑 Customer Rights</div>
+      <ul class="terms-list">
+        <li>• Price protection against upward adjustments</li>
+        <li>• Access to payment history and balance inquiry</li>
+        <li>• Option to accelerate payment without penalty</li>
+      </ul>
+
+      <div class="terms-sect-title">💳 Payment Methods</div>
+      <ul class="terms-list">
+        <li>💵 Cash payments at store premises</li>
+        <li>🏦 Electronic transfers / Bank deposits and transfers</li>
+        <li>💳 Credit and debit card payments</li>
+      </ul>
+
+      <div class="terms-note">
+        ✨ Our layaway program is crafted to give you <strong style="color:#d4af37;">exclusive access, peace of mind, and luxury-level service</strong>—because your dream jewelry deserves nothing less.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Open/close handlers for Terms modal
+  (function(){
+    const termsToggle = document.getElementById('termsToggle');
+    const termsBox    = document.getElementById('termsBox');
+    const termsClose  = document.getElementById('termsClose');
+
+    termsToggle.addEventListener('click', ()=>{
+      termsBox.classList.add('active');
+      termsToggle.style.display='none';
+    });
+    termsClose.addEventListener('click', ()=>{
+      termsBox.classList.remove('active');
+      termsToggle.style.display='inline-flex';
+    });
+  })();
+</script>
+<!-- ================== /TERMS BUTTON + MODAL ================== -->
+
 <body>
 
   <!-- ===== Shimmering Rotating Title + Big Diamond in Center ===== -->
