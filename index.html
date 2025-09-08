@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Gold Blessing - Dual Calculator System</title>
+    <title>The Gold Blessing - Layaway Calculator</title>
     <style>
         * {
             margin: 0;
@@ -21,21 +21,7 @@
             align-items: center;
         }
         
-        .demo-container {
-            text-align: center;
-            color: #d4af37;
-            padding: 40px;
-            z-index: 10;
-            position: relative;
-        }
-        .widget-container-left {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            z-index: 1000;
-        }
-        
-        .widget-container-right {
+        .widget-container {
             position: fixed;
             bottom: 30px;
             right: 30px;
@@ -56,24 +42,10 @@
             font-size: 1.5em;
             color: #0a0a0a;
             transition: all 0.3s ease;
-            position: relative;
         }
         
         .widget-toggle:hover {
             transform: scale(1.1);
-        }
-        
-        .widget-label {
-            position: absolute;
-            bottom: -25px;
-            font-size: 0.7em;
-            color: #d4af37;
-            white-space: nowrap;
-            text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
-            font-family: Georgia, serif;
-            font-weight: normal;
-            left: 50%;
-            transform: translateX(-50%);
         }
         
         .widget-box {
@@ -86,21 +58,13 @@
             display: none;
             position: absolute;
             bottom: 0;
+            right: 0;
             overflow-y: auto;
         }
         
         .widget-box.active {
             display: block;
             animation: slideUp 0.3s ease;
-        }
-        
-        /* Position adjustments for left/right boxes */
-        .widget-container-left .widget-box {
-            left: 0;
-        }
-        
-        .widget-container-right .widget-box {
-            right: 0;
         }
         
         @keyframes slideUp {
@@ -326,47 +290,16 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
-        #tgb-gold-dust {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        #tgb-gold-vignette {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
-        }
     </style>
 </head>
 <body>
-    <!-- Rotating Title with Logo -->
-    <div class="rotating-title-container">
-        <div class="rotating-text" id="rotatingText"></div>
-        <div class="center-logo">👑</div>
-    </div>
-
     <div class="demo-container">
         <h1 class="demo-title">The Gold Blessing</h1>
-        <p style="color: #f4e4c1;">Luxury Jewelry Calculators</p>
+        <p style="color: #f4e4c1;">Layaway Calculator - Click the button (bottom-right)</p>
     </div>
 
-    <!-- LAYAWAY CALCULATOR (LEFT) -->
-    <div class="widget-container-left">
-        <button class="widget-toggle" id="widgetToggle">
-            💰
-            <span class="widget-label">Layaway</span>
-        </button>
+    <div class="widget-container">
+        <button class="widget-toggle" id="widgetToggle">💰</button>
         
         <div class="widget-box" id="widgetBox">
             <div class="widget-header">
@@ -542,69 +475,69 @@
                         <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.85em;">₱18,000/mo</span>
                     </div>
                 </div>
-
-                <!-- Terms & Conditions Section -->
-                <div style="padding: 20px;">
-                    <div style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 15px; padding: 20px;">
-                        <h3 style="color: #d4af37; font-size: 1em; margin-bottom: 15px; text-align: center;">📜 Layaway Terms & Conditions</h3>
-                        
-                        <p style="color: rgba(244, 228, 193, 0.85); font-size: 0.75em; margin-bottom: 20px; line-height: 1.4; text-align: center;">
-                            At <strong style="color: #d4af37;">The Gold Blessing</strong>, we believe in <strong style="color: #d4af37;">clarity, flexibility, and trust</strong>. Here are the guidelines that safeguard your layaway journey:
-                        </p>
-                        
-                        <!-- Payment Terms -->
-                        <div style="margin-bottom: 18px;">
-                            <h4 style="color: #d4af37; font-size: 0.85em; margin-bottom: 8px;">💰 Payment Terms</h4>
-                            <ul style="list-style: none; padding: 0; margin: 0 0 0 10px;">
-                                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• The service fee is non-refundable</li>
-                                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• 60-day grace period from contract date</li>
-                                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• Daily storage fees apply after grace period</li>
-                                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• Partial payments minimum ₱500</li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Default & Abandonment -->
-                        <div style="margin-bottom: 18px;">
-                            <h4 style="color: #d4af37; font-size: 0.85em; margin-bottom: 8px;">⚠️ Default & Abandonment</h4>
-                            <ul style="list-style: none; padding: 0; margin: 0 0 0 10px;">
-                                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• Storage fees equal to item value</li>
-                                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• No payment for 3 consecutive months</li>
-                                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• Customer cancellation request</li>
-                                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• All deposits forfeited upon abandonment</li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Customer Rights -->
-                        <div style="margin-bottom: 18px;">
-                            <h4 style="color: #d4af37; font-size: 0.85em; margin-bottom: 8px;">👑 Customer Rights</h4>
-                            <ul style="list-style: none; padding: 0; margin: 0 0 0 10px;">
-                                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• Price Protection from gold increases</li>
-                                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• Access payment history anytime</li>
-                                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• Accelerate payments without penalties</li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Payment Methods -->
-                        <div style="margin-bottom: 18px;">
-                            <h4 style="color: #d4af37; font-size: 0.85em; margin-bottom: 8px;">💳 Payment Methods</h4>
-                            <ul style="list-style: none; padding: 0; margin: 0 0 0 10px;">
-                                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">💵 Cash at our boutique</li>
-                                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">🏦 Bank deposits or online transfers</li>
-                                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">💳 Credit and debit card payments</li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Closing Statement -->
-                        <div style="background: rgba(212, 175, 55, 0.1); border-radius: 8px; padding: 10px; border: 1px solid rgba(212, 175, 55, 0.2);">
-                            <p style="color: rgba(244, 228, 193, 0.85); font-size: 0.7em; text-align: center; line-height: 1.4; margin: 0;">
-                                ✨ Our layaway program is crafted to give you <strong style="color: #d4af37;">exclusive access, peace of mind, and luxury-level service</strong>—because your dream jewelry deserves nothing less.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <!-- Add this AFTER the closing </div> of the fee-table-container -->
+<!-- Terms & Conditions Section -->
+<div style="padding: 20px;">
+    <div style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 15px; padding: 20px;">
+        <h3 style="color: #d4af37; font-size: 1em; margin-bottom: 15px; text-align: center;">📜 Layaway Terms & Conditions</h3>
+        
+        <p style="color: rgba(244, 228, 193, 0.85); font-size: 0.75em; margin-bottom: 20px; line-height: 1.4; text-align: center;">
+            At <strong style="color: #d4af37;">The Gold Blessing</strong>, we believe in <strong style="color: #d4af37;">clarity, flexibility, and trust</strong>. Here are the guidelines that safeguard your layaway journey:
+        </p>
+        
+        <!-- Payment Terms -->
+        <div style="margin-bottom: 18px;">
+            <h4 style="color: #d4af37; font-size: 0.85em; margin-bottom: 8px;">💰 Payment Terms</h4>
+            <ul style="list-style: none; padding: 0; margin: 0 0 0 10px;">
+                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• The service fee is non-refundable</li>
+                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• 60-day grace period from contract date</li>
+                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• Daily storage fees apply after grace period</li>
+                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• Partial payments minimum ₱500</li>
+            </ul>
+        </div>
+        
+        <!-- Default & Abandonment -->
+        <div style="margin-bottom: 18px;">
+            <h4 style="color: #d4af37; font-size: 0.85em; margin-bottom: 8px;">⚠️ Default & Abandonment</h4>
+            <ul style="list-style: none; padding: 0; margin: 0 0 0 10px;">
+                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• Storage fees equal to item value</li>
+                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• No payment for 3 consecutive months</li>
+                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• Customer cancellation request</li>
+                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• All deposits forfeited upon abandonment</li>
+            </ul>
+        </div>
+        
+        <!-- Customer Rights -->
+        <div style="margin-bottom: 18px;">
+            <h4 style="color: #d4af37; font-size: 0.85em; margin-bottom: 8px;">👑 Customer Rights</h4>
+            <ul style="list-style: none; padding: 0; margin: 0 0 0 10px;">
+                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• Price Protection from gold increases</li>
+                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• Access payment history anytime</li>
+                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">• Accelerate payments without penalties</li>
+            </ul>
+        </div>
+        
+        <!-- Payment Methods -->
+        <div style="margin-bottom: 18px;">
+            <h4 style="color: #d4af37; font-size: 0.85em; margin-bottom: 8px;">💳 Payment Methods</h4>
+            <ul style="list-style: none; padding: 0; margin: 0 0 0 10px;">
+                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">💵 Cash at our boutique</li>
+                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">🏦 Bank deposits or online transfers</li>
+                <li style="color: rgba(244, 228, 193, 0.8); font-size: 0.7em; padding: 2px 0;">💳 Credit and debit card payments</li>
+            </ul>
+        </div>
+        
+        <!-- Closing Statement -->
+        <div style="background: rgba(212, 175, 55, 0.1); border-radius: 8px; padding: 10px; border: 1px solid rgba(212, 175, 55, 0.2);">
+            <p style="color: rgba(244, 228, 193, 0.85); font-size: 0.7em; text-align: center; line-height: 1.4; margin: 0;">
+                ✨ Our layaway program is crafted to give you <strong style="color: #d4af37;">exclusive access, peace of mind, and luxury-level service</strong>—because your dream jewelry deserves nothing less.
+            </p>
+        </div>
+    </div>
+</div>
             </div>
             
-            <!-- FOOTER SECTION - Why Choose Layaway -->
+            <!-- FOOTER SECTION - COMPLETELY OUTSIDE CALCULATOR-SECTION -->
             <div class="footer-section">
                 <div style="color: #d4af37; font-size: 1em; font-weight: bold; text-align: center; margin-bottom: 10px;">
                     🌟 Why Choose Layaway at The Gold Blessing?
@@ -681,84 +614,7 @@
         </div>
     </div>
 
-    <!-- GOLD PRICE CALCULATOR (RIGHT) - SIMPLE VERSION -->
-    <div class="widget-container-right">
-        <button class="widget-toggle" id="goldToggle">
-            🧮
-            <span class="widget-label">Gold Price</span>
-        </button>
-        
-        <div class="widget-box" id="goldBox">
-            <div class="widget-header">
-                <button class="close-btn" id="goldCloseBtn">×</button>
-                <h3 class="widget-title">Gold Price Calculator</h3>
-            </div>
-            
-            <div class="calculator-section">
-                <!-- Simple Gold Calculator -->
-                <div style="background: rgba(0, 0, 0, 0.5); padding: 30px; border-radius: 15px; border: 2px solid #d4af37;">
-                    
-                    <!-- Current Rate Input -->
-                    <div style="margin-bottom: 25px;">
-                        <label style="color: #d4af37; display: block; text-align: center; margin-bottom: 10px; font-size: 0.9em;">Current Gold Rate (₱ per gram)</label>
-                        <input type="number" id="goldRate" value="3500" style="width: 100%; padding: 15px; background: rgba(26, 26, 26, 0.9); border: 2px solid #d4af37; border-radius: 10px; color: #f4e4c1; font-size: 1.2em; text-align: center;">
-                    </div>
-                    
-                    <!-- Weight Input -->
-                    <div style="margin-bottom: 25px;">
-                        <label style="color: #d4af37; display: block; text-align: center; margin-bottom: 10px; font-size: 0.9em;">Weight (grams)</label>
-                        <input type="number" id="goldWeight" placeholder="Enter weight" step="0.01" style="width: 100%; padding: 15px; background: rgba(26, 26, 26, 0.9); border: 2px solid rgba(212, 175, 55, 0.5); border-radius: 10px; color: #f4e4c1; font-size: 1.2em; text-align: center;">
-                    </div>
-                    
-                    <!-- Total Price Display -->
-                    <div style="margin-bottom: 20px;">
-                        <label style="color: #d4af37; display: block; text-align: center; margin-bottom: 10px; font-size: 0.9em;">TOTAL PRICE</label>
-                        <div style="width: 100%; padding: 20px; background: #f4e445; border-radius: 10px; color: #000; font-size: 1.8em; font-weight: bold; text-align: center;" id="totalPrice">₱0</div>
-                    </div>
-                    
-                    <!-- Quick Weight Buttons -->
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px;">
-                        <button onclick="setWeight(1)" style="padding: 10px; background: rgba(212, 175, 55, 0.2); border: 1px solid #d4af37; border-radius: 8px; color: #d4af37; cursor: pointer; font-size: 0.9em;">1g</button>
-                        <button onclick="setWeight(5)" style="padding: 10px; background: rgba(212, 175, 55, 0.2); border: 1px solid #d4af37; border-radius: 8px; color: #d4af37; cursor: pointer; font-size: 0.9em;">5g</button>
-                        <button onclick="setWeight(10)" style="padding: 10px; background: rgba(212, 175, 55, 0.2); border: 1px solid #d4af37; border-radius: 8px; color: #d4af37; cursor: pointer; font-size: 0.9em;">10g</button>
-                        <button onclick="setWeight(20)" style="padding: 10px; background: rgba(212, 175, 55, 0.2); border: 1px solid #d4af37; border-radius: 8px; color: #d4af37; cursor: pointer; font-size: 0.9em;">20g</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <canvas id="tgb-gold-dust"></canvas>
-    <div id="tgb-gold-vignette"></div>
-
     <script>
-        // Rotating Text Creation
-        const rotatingTitleText = "THE GOLD BLESSING • LUXURY JEWELRY • EXCLUSIVE COLLECTIONS • ";
-        const rotatingTextElement = document.getElementById('rotatingText');
-        const titleChars = rotatingTitleText.split('');
-        const angleStep = 360 / titleChars.length;
-        
-        titleChars.forEach((char, i) => {
-            const span = document.createElement('span');
-            span.innerText = char;
-            span.style.transform = `rotate(${i * angleStep}deg)`;
-            rotatingTextElement.appendChild(span);
-        });
-
-        // Rotating Text Creation
-        const text = "THE GOLD BLESSING • LUXURY JEWELRY • EXCLUSIVE COLLECTIONS • ";
-        const rotatingText = document.getElementById('rotatingText');
-        const chars = text.split('');
-        const angleStep = 360 / chars.length;
-        
-        chars.forEach((char, i) => {
-            const span = document.createElement('span');
-            span.innerText = char;
-            span.style.transform = `rotate(${i * angleStep}deg)`;
-            rotatingText.appendChild(span);
-        });
-
-        // LAYAWAY CALCULATOR FUNCTIONALITY
         const widgetToggle = document.getElementById('widgetToggle');
         const widgetBox = document.getElementById('widgetBox');
         const closeBtn = document.getElementById('closeBtn');
@@ -787,12 +643,12 @@
         
         widgetToggle.addEventListener('click', () => {
             widgetBox.classList.add('active');
-            // Close gold calculator if open
-            document.getElementById('goldBox').classList.remove('active');
+            widgetToggle.style.display = 'none';
         });
         
         closeBtn.addEventListener('click', () => {
             widgetBox.classList.remove('active');
+            widgetToggle.style.display = 'flex';
         });
         
         optionCards.forEach(card => {
@@ -843,172 +699,114 @@
         
         priceInput.addEventListener('input', calculateFees);
         calculateFees();
+    </script>
+</body>
+    <!-- TGB Gold Dust Background Effect -->
+<style>
+    #tgb-gold-dust {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+    
+    #tgb-gold-vignette {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 2;
+        background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+    }
+</style>
 
-        // GOLD PRICE CALCULATOR FUNCTIONALITY - FIXED VERSION
-        const goldToggle = document.getElementById('goldToggle');
-        const goldBox = document.getElementById('goldBox');
-        const goldCloseBtn = document.getElementById('goldCloseBtn');
-        const goldAmount = document.getElementById('goldAmount');
-        const goldGrams = document.getElementById('goldGrams');
-        const ratePerGram = document.getElementById('ratePerGram');
-        const pricePerGram = document.getElementById('pricePerGram');
-        const totalGramsDisplay = document.getElementById('totalGramsDisplay');
-        const totalAmountDisplay = document.getElementById('totalAmountDisplay');
+<canvas id="tgb-gold-dust"></canvas>
+<div id="tgb-gold-vignette"></div>
+
+<script>
+    // Gold Dust Particle Effect for The Gold Blessing
+    (function() {
+        const canvas = document.getElementById('tgb-gold-dust');
+        const ctx = canvas.getContext('2d');
         
-        let lastEdited = '';
+        // Set canvas size
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
         
-        goldToggle.addEventListener('click', () => {
-            goldBox.classList.add('active');
-            widgetBox.classList.remove('active');
-        });
-        
-        goldCloseBtn.addEventListener('click', () => {
-            goldBox.classList.remove('active');
-        });
-        
-        function updateCalculations() {
-            const amount = parseFloat(goldAmount.value) || 0;
-            const grams = parseFloat(goldGrams.value) || 0;
-            const rate = parseFloat(ratePerGram.value) || 3500;
+        // Particle class
+        class GoldParticle {
+            constructor() {
+                this.reset();
+                this.y = Math.random() * canvas.height;
+            }
             
-            // Scenario 1: User typed in AMOUNT field
-            if (lastEdited === 'amount' && amount > 0) {
-                const newGrams = amount / rate;
-                goldGrams.value = newGrams.toFixed(2);
-                pricePerGram.textContent = '₱' + rate.toFixed(2);
-                totalGramsDisplay.textContent = newGrams.toFixed(2);
-                totalAmountDisplay.textContent = '₱' + amount.toLocaleString('en-PH');
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = -10;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 2 + 1;
+                this.opacity = Math.random() * 0.5 + 0.3;
+                this.shimmer = Math.random() * Math.PI * 2;
             }
-            // Scenario 2: User typed in GRAMS field
-            else if (lastEdited === 'grams' && grams > 0) {
-                const newAmount = grams * rate;
-                goldAmount.value = newAmount.toFixed(2);
-                pricePerGram.textContent = '₱' + rate.toFixed(2);
-                totalGramsDisplay.textContent = grams.toFixed(2);
-                totalAmountDisplay.textContent = '₱' + newAmount.toLocaleString('en-PH');
-            }
-            // Scenario 3: User typed in RATE field
-            else if (lastEdited === 'rate') {
-                if (grams > 0) {
-                    const newAmount = grams * rate;
-                    goldAmount.value = newAmount.toFixed(2);
-                    totalAmountDisplay.textContent = '₱' + newAmount.toLocaleString('en-PH');
-                } else if (amount > 0) {
-                    const newGrams = amount / rate;
-                    goldGrams.value = newGrams.toFixed(2);
-                    totalGramsDisplay.textContent = newGrams.toFixed(2);
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.shimmer += 0.05;
+                
+                // Reset if particle goes off screen
+                if (this.y > canvas.height + 10 || this.x < -10 || this.x > canvas.width + 10) {
+                    this.reset();
                 }
-                pricePerGram.textContent = '₱' + rate.toFixed(2);
-                totalGramsDisplay.textContent = (goldGrams.value || 0);
-                totalAmountDisplay.textContent = '₱' + (goldAmount.value || 0);
             }
-            // Scenario 4: Both amount and grams are filled
-            else if (amount > 0 && grams > 0) {
-                const calculatedRate = amount / grams;
-                pricePerGram.textContent = '₱' + calculatedRate.toFixed(2);
-                totalGramsDisplay.textContent = grams.toFixed(2);
-                totalAmountDisplay.textContent = '₱' + amount.toLocaleString('en-PH');
-            }
-            // Default display
-            else {
-                pricePerGram.textContent = '₱' + rate.toFixed(2);
-                totalGramsDisplay.textContent = grams.toFixed(2) || '0.00';
-                totalAmountDisplay.textContent = amount > 0 ? '₱' + amount.toLocaleString('en-PH') : '₱0.00';
+            
+            draw() {
+                const shimmerOpacity = this.opacity + Math.sin(this.shimmer) * 0.2;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                
+                // Create gradient for gold effect
+                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                gradient.addColorStop(0, `rgba(244, 228, 193, ${shimmerOpacity})`);
+                gradient.addColorStop(0.5, `rgba(212, 175, 55, ${shimmerOpacity})`);
+                gradient.addColorStop(1, `rgba(212, 175, 55, 0)`);
+                
+                ctx.fillStyle = gradient;
+                ctx.fill();
             }
         }
         
-        // Event listeners
-        goldAmount.addEventListener('input', () => {
-            lastEdited = 'amount';
-            updateCalculations();
-        });
+        // Create particles
+        const particles = [];
+        const particleCount = 50;
         
-        goldGrams.addEventListener('input', () => {
-            lastEdited = 'grams';
-            updateCalculations();
-        });
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new GoldParticle());
+        }
         
-        ratePerGram.addEventListener('input', () => {
-            lastEdited = 'rate';
-            updateCalculations();
-        });
+        // Animation loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            
+            requestAnimationFrame(animate);
+        }
         
-        // Initialize
-        updateCalculations();
-
-        // GOLD DUST PARTICLE EFFECT
-        (function() {
-            const canvas = document.getElementById('tgb-gold-dust');
-            const ctx = canvas.getContext('2d');
-            
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-            
-            class GoldParticle {
-                constructor() {
-                    this.reset();
-                    this.y = Math.random() * canvas.height;
-                }
-                
-                reset() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = -10;
-                    this.size = Math.random() * 3 + 1;
-                    this.speedX = Math.random() * 2 - 1;
-                    this.speedY = Math.random() * 2 + 1;
-                    this.opacity = Math.random() * 0.5 + 0.3;
-                    this.shimmer = Math.random() * Math.PI * 2;
-                }
-                
-                update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-                    this.shimmer += 0.05;
-                    
-                    if (this.y > canvas.height + 10 || this.x < -10 || this.x > canvas.width + 10) {
-                        this.reset();
-                    }
-                }
-                
-                draw() {
-                    const shimmerOpacity = this.opacity + Math.sin(this.shimmer) * 0.2;
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    
-                    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
-                    gradient.addColorStop(0, `rgba(244, 228, 193, ${shimmerOpacity})`);
-                    gradient.addColorStop(0.5, `rgba(212, 175, 55, ${shimmerOpacity})`);
-                    gradient.addColorStop(1, `rgba(212, 175, 55, 0)`);
-                    
-                    ctx.fillStyle = gradient;
-                    ctx.fill();
-                }
-            }
-            
-            const particles = [];
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new GoldParticle());
-            }
-            
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                particles.forEach(particle => {
-                    particle.update();
-                    particle.draw();
-                });
-                
-                requestAnimationFrame(animate);
-            }
-            
-            animate();
-        })();
-    </script>
-</body>
+        animate();
+    })();
+</script>
 </html>
