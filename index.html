@@ -16,12 +16,49 @@
     }
 
     /* ===== Rotating “THE GOLD BLESSING” (center) ===== */
-    .rotating-text-container{
-      position:fixed; top:50%; left:50%;
-      transform:translate(-50%,-50%);
-      width:520px; height:520px;
-      z-index:3; pointer-events:none;
+    <div class="rotating-text-container">
+  <!-- Rotating text ring -->
+  <svg class="rotating-text" viewBox="0 0 300 300">
+    <defs>
+      <path id="circle" d="M150,150 m-100,0 a100,100 0 1,1 200,0 a100,100 0 1,1 -200,0"></path>
+      <linearGradient id="goldShine" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%"   stop-color="#6b5720"/>
+        <stop offset="25%"  stop-color="#d4af37"/>
+        <stop offset="50%"  stop-color="#f4e4c1"/>
+        <stop offset="75%"  stop-color="#d4af37"/>
+        <stop offset="100%" stop-color="#6b5720"/>
+        <animate attributeName="x1" values="0%;100%" dur="6s" repeatCount="indefinite"/>
+        <animate attributeName="x2" values="100%;200%" dur="6s" repeatCount="indefinite"/>
+      </linearGradient>
+    </defs>
+    <text>
+      <textPath href="#circle" fill="url(#goldShine)" font-size="24" font-weight="bold"
+                letter-spacing="8" font-family="Georgia, serif">
+        THE GOLD BLESSING • THE GOLD BLESSING • THE GOLD BLESSING • 
+      </textPath>
+    </text>
+  </svg>
+
+  <!-- Big Diamond in the center -->
+  <div class="center-diamond">💎</div>
+</div>
     }
+    .center-diamond {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 100px;  /* size of diamond */
+  animation: pulse 2s infinite ease-in-out;
+  filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.8))
+          drop-shadow(0 0 50px rgba(244, 228, 193, 0.5));
+}
+
+@keyframes pulse {
+  0%   { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+  50%  { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+}
     .rotating-text{
       width:100%; height:100%;
       animation:spin 16s linear infinite;
