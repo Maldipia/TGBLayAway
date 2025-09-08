@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Gold Blessing - Layaway Calculator Widget</title>
+    <title>The Gold Blessing - Layaway Calculator</title>
     <style>
         * {
             margin: 0;
@@ -21,7 +21,6 @@
             align-items: center;
         }
         
-        /* Floating Widget Container */
         .widget-container {
             position: fixed;
             bottom: 30px;
@@ -29,7 +28,6 @@
             z-index: 1000;
         }
         
-        /* Toggle Button */
         .widget-toggle {
             background: linear-gradient(135deg, #d4af37 0%, #f4e4c1 100%);
             border: none;
@@ -37,9 +35,7 @@
             height: 60px;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 
-                0 10px 30px rgba(212, 175, 55, 0.4),
-                0 5px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -49,22 +45,16 @@
         }
         
         .widget-toggle:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 
-                0 15px 40px rgba(212, 175, 55, 0.6),
-                0 5px 20px rgba(0, 0, 0, 0.6);
+            transform: scale(1.1);
         }
         
-        /* Widget Box */
         .widget-box {
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             border: 2px solid #d4af37;
             border-radius: 20px;
-            width: 420px;
-            max-height: 650px;
-            box-shadow: 
-                0 20px 60px rgba(212, 175, 55, 0.3),
-                0 10px 30px rgba(0, 0, 0, 0.8);
+            width: 460px;
+            max-height: 700px;
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
             display: none;
             position: absolute;
             bottom: 0;
@@ -78,24 +68,15 @@
         }
         
         @keyframes slideUp {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         
-        /* Widget Header */
         .widget-header {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%);
             padding: 20px;
             border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            position: relative;
         }
         
         .widget-title {
@@ -104,13 +85,6 @@
             font-weight: bold;
             text-align: center;
             margin-bottom: 5px;
-        }
-        
-        .widget-subtitle {
-            color: rgba(244, 228, 193, 0.8);
-            font-size: 0.85em;
-            text-align: center;
-            font-style: italic;
         }
         
         .close-btn {
@@ -125,30 +99,15 @@
             border-radius: 50%;
             cursor: pointer;
             font-size: 1.2em;
-            transition: all 0.3s ease;
         }
         
         .close-btn:hover {
             background: #d4af37;
             color: #0a0a0a;
-            transform: rotate(90deg);
         }
         
-        /* Calculator Section */
         .calculator-section {
             padding: 20px;
-        }
-        
-        .input-wrapper {
-            margin-bottom: 20px;
-        }
-        
-        .input-label {
-            color: #d4af37;
-            font-size: 0.9em;
-            margin-bottom: 8px;
-            display: block;
-            font-weight: 600;
         }
         
         .price-input {
@@ -161,16 +120,9 @@
             font-size: 1.1em;
             font-weight: bold;
             text-align: center;
-            transition: all 0.3s ease;
+            margin-bottom: 15px;
         }
         
-        .price-input:focus {
-            outline: none;
-            border-color: #d4af37;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-        }
-        
-        /* Quick Select Buttons */
         .quick-select {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -186,119 +138,96 @@
             border-radius: 8px;
             cursor: pointer;
             font-size: 0.85em;
-            transition: all 0.3s ease;
         }
         
         .quick-btn:hover {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.1) 100%);
-            transform: translateY(-2px);
         }
         
-        /* Payment Options */
         .payment-section {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
         }
         
-        .payment-title {
+        .section-title {
             color: #d4af37;
-            font-size: 0.95em;
-            font-weight: 600;
-            margin-bottom: 15px;
+            font-size: 1em;
+            font-weight: bold;
             text-align: center;
+            margin-bottom: 15px;
         }
         
         .payment-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 15px;
         }
         
-        .payment-card {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(45, 45, 45, 0.9) 100%);
-            border: 2px solid rgba(212, 175, 55, 0.2);
+        .option-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 2px solid rgba(212, 175, 55, 0.3);
             border-radius: 10px;
-            padding: 12px 10px;
+            padding: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         
-        .payment-card:hover {
-            border-color: rgba(212, 175, 55, 0.5);
+        .option-card:hover {
+            border-color: rgba(212, 175, 55, 0.6);
             transform: translateY(-2px);
         }
         
-        .payment-card.selected {
+        .option-card.selected {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%);
             border-color: #d4af37;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
         
-        .payment-card h4 {
+        .option-title {
             color: #d4af37;
-            font-size: 1em;
-            margin-bottom: 10px;
-            text-align: center;
+            font-size: 1.1em;
             font-weight: bold;
+            text-align: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
             border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding-bottom: 6px;
         }
         
-        .card-details {
-            font-size: 0.75em;
-        }
-        
-        .detail-list {
+        .option-details {
             list-style: none;
             padding: 0;
             margin: 0;
         }
         
-        .detail-list li {
+        .option-details li {
             color: #f4e4c1;
-            font-size: 0.75em;
-            margin-bottom: 6px;
-            padding: 3px 0;
+            font-size: 0.8em;
+            margin-bottom: 8px;
+            padding: 4px 0;
         }
         
-        .detail-list li strong {
+        .option-details li strong {
             color: rgba(212, 175, 55, 0.9);
-            font-weight: 600;
-            display: inline-block;
-            margin-right: 3px;
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.9em;
         }
         
-        .detail-list li.storage-highlight {
+        .storage-free {
             background: rgba(212, 175, 55, 0.15);
-            padding: 5px;
+            padding: 6px;
             border-radius: 5px;
-            margin-top: 5px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-        
-        .detail-list li.storage-highlight strong {
-            color: #d4af37;
-        }
-        
-        /* Grace Period Notice */
-        .grace-notice {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%);
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 20px;
+            margin-top: 8px;
             text-align: center;
             border: 1px solid rgba(212, 175, 55, 0.3);
         }
         
-        .grace-text {
-            color: #f4e4c1;
-            font-size: 0.9em;
-            font-weight: 600;
+        .storage-free strong {
+            color: #d4af37 !important;
         }
         
-        /* Results Display */
         .results-display {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(0, 0, 0, 0.3) 100%);
             border-radius: 15px;
@@ -307,24 +236,11 @@
             border: 1px solid rgba(212, 175, 55, 0.2);
         }
         
-        .result-section-title {
-            color: #d4af37;
-            font-size: 0.95em;
-            font-weight: 600;
-            margin-bottom: 10px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
-        
         .result-row {
             display: flex;
             justify-content: space-between;
             padding: 8px 0;
             border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-        }
-        
-        .result-row:last-child {
-            border-bottom: none;
         }
         
         .result-label {
@@ -343,67 +259,10 @@
             font-size: 1.05em;
         }
         
-        /* Fee Table */
-        .fee-table-container {
-            max-height: 200px;
-            overflow-y: auto;
-            margin-top: 20px;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-        }
-        
-        .fee-table-container::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        .fee-table-container::-webkit-scrollbar-track {
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 10px;
-        }
-        
-        .fee-table-container::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #d4af37 0%, #f4e4c1 100%);
-            border-radius: 10px;
-        }
-        
-        .fee-row {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            padding: 8px;
-            margin-bottom: 5px;
-            background: rgba(212, 175, 55, 0.02);
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .fee-row:hover {
-            background: rgba(212, 175, 55, 0.1);
-            transform: translateX(5px);
-        }
-        
-        .fee-row.active {
-            background: rgba(212, 175, 55, 0.2);
-            border: 1px solid #d4af37;
-        }
-        
-        .fee-col {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.85em;
-        }
-        
-        .fee-col:first-child {
-            color: rgba(212, 175, 55, 0.9);
-            font-weight: 600;
-        }
-        
-        /* Demo Container */
         .demo-container {
             text-align: center;
             color: #d4af37;
             padding: 40px;
-            max-width: 800px;
         }
         
         .demo-title {
@@ -414,58 +273,26 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
-        .demo-subtitle {
-            color: rgba(244, 228, 193, 0.8);
-            font-size: 1.2em;
-            margin-bottom: 30px;
-        }
-        
-        /* Mobile Responsive */
-        @media (max-width: 480px) {
-            .widget-container {
-                bottom: 20px;
-                right: 20px;
-            }
-            
-            .widget-box {
-                width: calc(100vw - 40px);
-                max-width: 420px;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Demo Content -->
     <div class="demo-container">
         <h1 class="demo-title">The Gold Blessing</h1>
-        <p class="demo-subtitle">Complete Layaway Calculator Widget</p>
-        <p style="color: #f4e4c1;">Click the golden button (bottom-right) to open the calculator</p>
+        <p style="color: #f4e4c1;">Layaway Calculator - Click the button (bottom-right)</p>
     </div>
 
-    <!-- Floating Widget -->
     <div class="widget-container">
-        <!-- Toggle Button -->
-        <button class="widget-toggle" id="widgetToggle" title="Open Calculator">
-            💰
-        </button>
+        <button class="widget-toggle" id="widgetToggle">💰</button>
         
-        <!-- Widget Box -->
         <div class="widget-box" id="widgetBox">
             <div class="widget-header">
                 <button class="close-btn" id="closeBtn">×</button>
                 <h3 class="widget-title">Layaway Calculator</h3>
-                <p class="widget-subtitle">Complete Payment Breakdown</p>
             </div>
             
             <div class="calculator-section">
-                <!-- Price Input -->
-                <div class="input-wrapper">
-                    <label class="input-label">Enter Item Price</label>
-                    <input type="number" class="price-input" id="priceInput" placeholder="₱20,000" value="20000">
-                </div>
+                <input type="number" class="price-input" id="priceInput" placeholder="Enter Item Price" value="20000">
                 
-                <!-- Quick Select -->
                 <div class="quick-select">
                     <button class="quick-btn" data-price="5000">₱5K</button>
                     <button class="quick-btn" data-price="10000">₱10K</button>
@@ -475,31 +302,57 @@
                     <button class="quick-btn" data-price="100000">₱100K</button>
                 </div>
                 
-                <!-- Payment Options -->
                 <div class="payment-section">
-                    <div class="payment-title">SELECT PAYMENT OPTION</div>
+                    <div class="section-title">SELECT PAYMENT OPTION</div>
                     <div class="payment-options">
-                        <div class="payment-card selected" data-option="standard">
-                            <h4>STANDARD</h4>
-                            <div class="dp-text">50% Down</div>
-                            <div class="fee-text">5% Service Fee</div>
+                        <div class="option-card selected" data-option="a">
+                            <div class="option-title">OPTION A</div>
+                            <ul class="option-details">
+                                <li>
+                                    <strong>Initial Deposit:</strong>
+                                    50% of total amount
+                                </li>
+                                <li>
+                                    <strong>Service Fee:</strong>
+                                    5% of merchandise value
+                                </li>
+                                <li>
+                                    <strong>Payment Period:</strong>
+                                    Open-ended
+                                </li>
+                                <li class="storage-free">
+                                    <strong>Storage Charges:</strong>
+                                    FREE for 60 days
+                                </li>
+                            </ul>
                         </div>
-                        <div class="payment-card" data-option="flexi">
-                            <h4>FLEXI</h4>
-                            <div class="dp-text">20% Down</div>
-                            <div class="fee-text">10% Service Fee</div>
+                        
+                        <div class="option-card" data-option="b">
+                            <div class="option-title">OPTION B</div>
+                            <ul class="option-details">
+                                <li>
+                                    <strong>Initial Deposit:</strong>
+                                    20% of total amount
+                                </li>
+                                <li>
+                                    <strong>Service Fee:</strong>
+                                    10% of merchandise value
+                                </li>
+                                <li>
+                                    <strong>Payment Period:</strong>
+                                    Open-ended
+                                </li>
+                                <li class="storage-free">
+                                    <strong>Storage Charges:</strong>
+                                    FREE for 60 days
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Grace Period Notice -->
-                <div class="grace-notice">
-                    <p class="grace-text">✨ First 60 Days: FREE Storage ✨</p>
-                </div>
-                
-                <!-- Payment Breakdown -->
                 <div class="results-display">
-                    <div class="result-section-title">PAYMENT BREAKDOWN</div>
+                    <div class="section-title" style="margin-bottom: 15px;">PAYMENT BREAKDOWN</div>
                     <div class="result-row">
                         <span class="result-label">Item Price</span>
                         <span class="result-value" id="itemPrice">₱20,000</span>
@@ -522,9 +375,8 @@
                     </div>
                 </div>
                 
-                <!-- Storage Fees -->
                 <div class="results-display">
-                    <div class="result-section-title">STORAGE FEES (After 60 Days)</div>
+                    <div class="section-title" style="margin-bottom: 15px;">STORAGE FEES (After 60 Days)</div>
                     <div class="result-row">
                         <span class="result-label">Daily Storage Rate</span>
                         <span class="result-value highlight" id="dailyRate">₱60</span>
@@ -537,110 +389,38 @@
                         <span class="result-label">If 60 Days Late</span>
                         <span class="result-value" id="day60Late">₱3,600</span>
                     </div>
-                    <div class="result-row">
-                        <span class="result-label">If 90 Days Late</span>
-                        <span class="result-value" id="day90Late">₱5,400</span>
-                    </div>
-                </div>
-                
-                <!-- Fee Table -->
-                <div class="fee-table-container">
-                    <div class="fee-row" data-min="1000" data-max="2999" data-fee="5">
-                        <span class="fee-col">₱1K - ₱3K</span>
-                        <span class="fee-col">₱5/day</span>
-                        <span class="fee-col">₱150/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="3000" data-max="4999" data-fee="10">
-                        <span class="fee-col">₱3K - ₱5K</span>
-                        <span class="fee-col">₱10/day</span>
-                        <span class="fee-col">₱300/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="5000" data-max="7499" data-fee="15">
-                        <span class="fee-col">₱5K - ₱7.5K</span>
-                        <span class="fee-col">₱15/day</span>
-                        <span class="fee-col">₱450/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="7500" data-max="9999" data-fee="25">
-                        <span class="fee-col">₱7.5K - ₱10K</span>
-                        <span class="fee-col">₱25/day</span>
-                        <span class="fee-col">₱750/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="10000" data-max="14999" data-fee="30">
-                        <span class="fee-col">₱10K - ₱15K</span>
-                        <span class="fee-col">₱30/day</span>
-                        <span class="fee-col">₱900/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="15000" data-max="19999" data-fee="45">
-                        <span class="fee-col">₱15K - ₱20K</span>
-                        <span class="fee-col">₱45/day</span>
-                        <span class="fee-col">₱1,350/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="20000" data-max="24999" data-fee="60">
-                        <span class="fee-col">₱20K - ₱25K</span>
-                        <span class="fee-col">₱60/day</span>
-                        <span class="fee-col">₱1,800/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="25000" data-max="29999" data-fee="75">
-                        <span class="fee-col">₱25K - ₱30K</span>
-                        <span class="fee-col">₱75/day</span>
-                        <span class="fee-col">₱2,250/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="30000" data-max="39999" data-fee="90">
-                        <span class="fee-col">₱30K - ₱40K</span>
-                        <span class="fee-col">₱90/day</span>
-                        <span class="fee-col">₱2,700/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="40000" data-max="49999" data-fee="120">
-                        <span class="fee-col">₱40K - ₱50K</span>
-                        <span class="fee-col">₱120/day</span>
-                        <span class="fee-col">₱3,600/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="50000" data-max="59999" data-fee="150">
-                        <span class="fee-col">₱50K - ₱60K</span>
-                        <span class="fee-col">₱150/day</span>
-                        <span class="fee-col">₱4,500/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="60000" data-max="74999" data-fee="180">
-                        <span class="fee-col">₱60K - ₱75K</span>
-                        <span class="fee-col">₱180/day</span>
-                        <span class="fee-col">₱5,400/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="75000" data-max="89999" data-fee="225">
-                        <span class="fee-col">₱75K - ₱90K</span>
-                        <span class="fee-col">₱225/day</span>
-                        <span class="fee-col">₱6,750/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="90000" data-max="99999" data-fee="270">
-                        <span class="fee-col">₱90K - ₱100K</span>
-                        <span class="fee-col">₱270/day</span>
-                        <span class="fee-col">₱8,100/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="100000" data-max="199999" data-fee="300">
-                        <span class="fee-col">₱100K - ₱200K</span>
-                        <span class="fee-col">₱300/day</span>
-                        <span class="fee-col">₱9,000/mo</span>
-                    </div>
-                    <div class="fee-row" data-min="200000" data-max="999999999" data-fee="600">
-                        <span class="fee-col">₱200K+</span>
-                        <span class="fee-col">₱600/day</span>
-                        <span class="fee-col">₱18,000/mo</span>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Get elements
         const widgetToggle = document.getElementById('widgetToggle');
         const widgetBox = document.getElementById('widgetBox');
         const closeBtn = document.getElementById('closeBtn');
         const priceInput = document.getElementById('priceInput');
         const quickBtns = document.querySelectorAll('.quick-btn');
-        const paymentCards = document.querySelectorAll('.payment-card');
-        const feeRows = document.querySelectorAll('.fee-row');
+        const optionCards = document.querySelectorAll('.option-card');
         
-        // Toggle widget
+        const storageFees = [
+            { min: 1000, max: 2999, fee: 5 },
+            { min: 3000, max: 4999, fee: 10 },
+            { min: 5000, max: 7499, fee: 15 },
+            { min: 7500, max: 9999, fee: 25 },
+            { min: 10000, max: 14999, fee: 30 },
+            { min: 15000, max: 19999, fee: 45 },
+            { min: 20000, max: 24999, fee: 60 },
+            { min: 25000, max: 29999, fee: 75 },
+            { min: 30000, max: 39999, fee: 90 },
+            { min: 40000, max: 49999, fee: 120 },
+            { min: 50000, max: 59999, fee: 150 },
+            { min: 60000, max: 74999, fee: 180 },
+            { min: 75000, max: 89999, fee: 225 },
+            { min: 90000, max: 99999, fee: 270 },
+            { min: 100000, max: 199999, fee: 300 },
+            { min: 200000, max: 999999999, fee: 600 }
+        ];
+        
         widgetToggle.addEventListener('click', () => {
             widgetBox.classList.add('active');
             widgetToggle.style.display = 'none';
@@ -651,16 +431,14 @@
             widgetToggle.style.display = 'flex';
         });
         
-        // Payment card selection
-        paymentCards.forEach(card => {
+        optionCards.forEach(card => {
             card.addEventListener('click', () => {
-                paymentCards.forEach(c => c.classList.remove('selected'));
+                optionCards.forEach(c => c.classList.remove('selected'));
                 card.classList.add('selected');
                 calculateFees();
             });
         });
         
-        // Quick select buttons
         quickBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 priceInput.value = btn.dataset.price;
@@ -668,67 +446,38 @@
             });
         });
         
-        // Calculate fees function
         function calculateFees() {
             const price = parseFloat(priceInput.value) || 0;
-            const selectedCard = document.querySelector('.payment-card.selected');
-            const isStandard = selectedCard.dataset.option === 'standard';
+            const selectedCard = document.querySelector('.option-card.selected');
+            const isOptionA = selectedCard.dataset.option === 'a';
             
-            // Calculate based on selected option
-            const serviceFeeRate = isStandard ? 0.05 : 0.10;
-            const downPaymentRate = isStandard ? 0.50 : 0.20;
+            const serviceFeeRate = isOptionA ? 0.05 : 0.10;
+            const downPaymentRate = isOptionA ? 0.50 : 0.20;
             
             const serviceFee = price * serviceFeeRate;
             const totalContract = price + serviceFee;
             const downPayment = totalContract * downPaymentRate;
             const balance = totalContract - downPayment;
             
-            // Find storage fee tier
             let dailyFee = 0;
-            feeRows.forEach(row => {
-                row.classList.remove('active');
-                const min = parseFloat(row.dataset.min);
-                const max = parseFloat(row.dataset.max);
-                if (price >= min && price <= max) {
-                    dailyFee = parseFloat(row.dataset.fee);
-                    row.classList.add('active');
-                    row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            for (let tier of storageFees) {
+                if (price >= tier.min && price <= tier.max) {
+                    dailyFee = tier.fee;
+                    break;
                 }
-            });
+            }
             
-            // Update display
-            document.getElementById('itemPrice').textContent = formatCurrency(price);
-            document.getElementById('serviceFee').textContent = formatCurrency(serviceFee);
-            document.getElementById('totalContract').textContent = formatCurrency(totalContract);
-            document.getElementById('downPayment').textContent = formatCurrency(downPayment);
-            document.getElementById('balance').textContent = formatCurrency(balance);
-            
-            document.getElementById('dailyRate').textContent = formatCurrency(dailyFee);
-            document.getElementById('day30Late').textContent = formatCurrency(dailyFee * 30);
-            document.getElementById('day60Late').textContent = formatCurrency(dailyFee * 60);
-            document.getElementById('day90Late').textContent = formatCurrency(dailyFee * 90);
+            document.getElementById('itemPrice').textContent = '₱' + price.toLocaleString();
+            document.getElementById('serviceFee').textContent = '₱' + serviceFee.toLocaleString();
+            document.getElementById('totalContract').textContent = '₱' + totalContract.toLocaleString();
+            document.getElementById('downPayment').textContent = '₱' + downPayment.toLocaleString();
+            document.getElementById('balance').textContent = '₱' + balance.toLocaleString();
+            document.getElementById('dailyRate').textContent = '₱' + dailyFee.toLocaleString();
+            document.getElementById('day30Late').textContent = '₱' + (dailyFee * 30).toLocaleString();
+            document.getElementById('day60Late').textContent = '₱' + (dailyFee * 60).toLocaleString();
         }
         
-        // Format currency
-        function formatCurrency(amount) {
-            return '₱' + amount.toLocaleString('en-US', { minimumFractionDigits: 0 });
-        }
-        
-        // Input event listener
         priceInput.addEventListener('input', calculateFees);
-        
-        // Click fee rows to set price
-        feeRows.forEach(row => {
-            row.addEventListener('click', () => {
-                const min = parseFloat(row.dataset.min);
-                const max = parseFloat(row.dataset.max);
-                const avgPrice = (min + max) / 2;
-                priceInput.value = Math.round(avgPrice);
-                calculateFees();
-            });
-        });
-        
-        // Initial calculation
         calculateFees();
     </script>
 </body>
