@@ -155,6 +155,37 @@
 </head>
   <!-- ================== TERMS BUTTON (LOWER MIDDLE) + MODAL ================== -->
 <style>
+  @media (max-width: 520px) {
+  /* shrink popup width */
+  .box {
+    width: calc(100vw - 40px);
+    max-height: 85vh;
+  }
+
+  /* shrink buttons */
+  .toggle {
+    min-height: 50px;
+    padding: 8px 14px;
+    font-size: 0.9em;
+  }
+  .toggle-emoji { font-size: 1.2em; }
+  .toggle-text  { font-size: 0.8em; }
+
+  /* reposition floating buttons */
+  .gold-container { left: 16px; bottom: 80px; }
+  .widget-container { right: 16px; bottom: 80px; }
+  .terms-container { left: 50%; bottom: 16px; transform: translateX(-50%); }
+
+  /* shrink rotating title ring so it doesn’t clash */
+  .rotating-text-container {
+    width: 240px;
+    height: 240px;
+    top: 38%;
+  }
+  .center-diamond {
+    font-size: 72px; /* smaller diamond in center */
+  }
+}
   /* container centered near bottom */
   .terms-container{
     position:fixed;
