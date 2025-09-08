@@ -15,55 +15,36 @@
       overflow-x:hidden;
     }
 
-    /* ===== Rotating “THE GOLD BLESSING” (center) ===== */
-    <div class="rotating-text-container">
-  <!-- Rotating text ring -->
-  <svg class="rotating-text" viewBox="0 0 300 300">
-    <defs>
-      <path id="circle" d="M150,150 m-100,0 a100,100 0 1,1 200,0 a100,100 0 1,1 -200,0"></path>
-      <linearGradient id="goldShine" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%"   stop-color="#6b5720"/>
-        <stop offset="25%"  stop-color="#d4af37"/>
-        <stop offset="50%"  stop-color="#f4e4c1"/>
-        <stop offset="75%"  stop-color="#d4af37"/>
-        <stop offset="100%" stop-color="#6b5720"/>
-        <animate attributeName="x1" values="0%;100%" dur="6s" repeatCount="indefinite"/>
-        <animate attributeName="x2" values="100%;200%" dur="6s" repeatCount="indefinite"/>
-      </linearGradient>
-    </defs>
-    <text>
-      <textPath href="#circle" fill="url(#goldShine)" font-size="24" font-weight="bold"
-                letter-spacing="8" font-family="Georgia, serif">
-        THE GOLD BLESSING • THE GOLD BLESSING • THE GOLD BLESSING • 
-      </textPath>
-    </text>
-  </svg>
-
-  <!-- Big Diamond in the center -->
-  <div class="center-diamond">💎</div>
-</div>
+    /* ===== Rotating “THE GOLD BLESSING” (center) + Diamond ===== */
+    .rotating-text-container{
+      position:fixed;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      width:320px; height:320px;
+      z-index:3;               /* above dust, below modals */
+      pointer-events:none;
     }
-    .center-diamond {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 100px;  /* size of diamond */
-  animation: pulse 2s infinite ease-in-out;
-  filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.8))
-          drop-shadow(0 0 50px rgba(244, 228, 193, 0.5));
-}
-
-@keyframes pulse {
-  0%   { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
-  50%  { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
-  100% { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
-}
     .rotating-text{
       width:100%; height:100%;
       animation:spin 16s linear infinite;
     }
     @keyframes spin{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+
+    .center-diamond{
+      position:absolute;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      font-size:100px;             /* big diamond */
+      animation:pulse 2s ease-in-out infinite;
+      filter: drop-shadow(0 0 25px rgba(212,175,55,0.8))
+              drop-shadow(0 0 50px rgba(244,228,193,0.5));
+      line-height:1;
+    }
+    @keyframes pulse{
+      0%   { transform:translate(-50%,-50%) scale(1);   opacity:1; }
+      50%  { transform:translate(-50%,-50%) scale(1.2); opacity:.85; }
+      100% { transform:translate(-50%,-50%) scale(1);   opacity:1; }
+    }
 
     /* ===== Toggle Buttons (with labels) ===== */
     .widget-container,.gold-container{
@@ -84,7 +65,7 @@
       transition: transform .25s ease, box-shadow .25s ease;
     }
     .toggle:hover{ transform:translateY(-2px); box-shadow:0 16px 40px rgba(212,175,55,.6); }
-    .toggle-emoji{ font-size:1.4em; line-height:1; }
+    .toggle-emoji{ font-size:1.4em; line-height:1; display:inline-flex; align-items:center; }
     .toggle-text{ line-height:1; }
 
     /* ===== Popup Boxes ===== */
@@ -93,6 +74,7 @@
       border:2px solid #d4af37; border-radius:20px; width:460px; max-height:80vh;
       box-shadow:0 20px 60px rgba(212,175,55,.3);
       display:none; position:absolute; bottom:0; overflow-y:auto;
+      z-index:1001;
     }
     .box.active{ display:block; animation:slideUp .3s ease; }
     @keyframes slideUp{ from{transform:translateY(100%);opacity:0} to{transform:translateY(0);opacity:1} }
@@ -173,7 +155,7 @@
 </head>
 <body>
 
-  <!-- ===== Shimmering Rotating Title ===== -->
+  <!-- ===== Shimmering Rotating Title + Big Diamond in Center ===== -->
   <div class="rotating-text-container" aria-hidden="true">
     <svg class="rotating-text" viewBox="0 0 320 320">
       <defs>
@@ -208,12 +190,15 @@
         </textPath>
       </text>
     </svg>
+
+    <!-- Big Diamond in the center (animated) -->
+    <div class="center-diamond">💎</div>
   </div>
 
   <!-- ===== Gold Price Calculator (LEFT) ===== -->
   <div class="gold-container">
     <button class="toggle" id="goldToggle" title="Open Gold Calculator">
-      <span class="toggle-emoji">🧮</span><span class="toggle-text">Gold Calculator</span>
+      <span class="toggle-emoji">💎</span><span class="toggle-text">Gold Calculator</span>
     </button>
 
     <div class="box left" id="goldBox" role="dialog" aria-modal="true" aria-label="Gold Calculator">
@@ -275,7 +260,13 @@
   <!-- ===== Layaway Calculator (RIGHT) ===== -->
   <div class="widget-container">
     <button class="toggle" id="layToggle" title="Open Layaway Calculator">
-      <span class="toggle-emoji">💰</span><span class="toggle-text">Layaway Calculator</span>
+      <!-- Gold bar SVG icon -->
+      <span class="toggle-emoji" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 640 512" fill="#b8860b">
+          <path d="M480 160H160L64 352h512L480 160zM0 416h640v64H0V416z"/>
+        </svg>
+      </span>
+      <span class="toggle-text">Layaway Calculator</span>
     </button>
 
     <div class="box right" id="layBox" role="dialog" aria-modal="true" aria-label="Layaway Calculator">
@@ -604,7 +595,7 @@
     priceInput.addEventListener('input', calcLayaway);
     calcLayaway();
 
-    /* ========== GOLD DUST BACKGROUND ========== */
+    /* ========== GOLD DUST BACKGROUND (thin, elegant) ========== */
     (function(){
       const canvas = document.getElementById('tgb-gold-dust');
       const ctx = canvas.getContext('2d');
@@ -615,19 +606,19 @@
         constructor(first=false){ this.reset(first); }
         reset(first=false){
           this.x = Math.random() * canvas.width;
-this.y = first ? Math.random() * canvas.height : -10;
-this.r = Math.random() * 1.5 + 0.5;   // smaller radius (was 2 + 0.8)
-this.vx = Math.random() * 1 - 0.5;    // gentler side drift (was 2 - 1)
-this.vy = Math.random() * 1 + 0.4;    // slower fall (was 2 + 1.2)
-this.a  = Math.random() * 0.4 + 0.2;  // softer opacity (was 0.5 + 0.3)
-this.t  = Math.random() * Math.PI * 2;
+          this.y = first ? Math.random() * canvas.height : -10;
+          this.r = Math.random() * 1.5 + 0.5;   // small sparkle
+          this.vx = Math.random() * 1 - 0.5;    // gentle drift
+          this.vy = Math.random() * 1 + 0.4;    // slow fall
+          this.a  = Math.random() * 0.4 + 0.2;  // soft opacity
+          this.t  = Math.random() * Math.PI * 2;
         }
         step(){
           this.x += this.vx; this.y += this.vy; this.t += 0.05;
           if (this.y > canvas.height + 10 || this.x < -10 || this.x > canvas.width + 10) this.reset();
         }
         draw(){
-          const op = this.a + Math.sin(this.t)*0.2;
+          const op = Math.max(0, Math.min(1, this.a + Math.sin(this.t)*0.2));
           const g = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.r*2.6);
           g.addColorStop(0, `rgba(244,228,193,${op})`);
           g.addColorStop(0.5,`rgba(212,175,55,${op})`);
@@ -635,7 +626,7 @@ this.t  = Math.random() * Math.PI * 2;
           ctx.fillStyle=g; ctx.beginPath(); ctx.arc(this.x,this.y,this.r*2.2,0,Math.PI*2); ctx.fill();
         }
       }
-      const particles = Array.from({length: 320}, ()=>new Particle(true)); // fewer particles for lighter dust
+      const particles = Array.from({length: 60}, ()=>new Particle(true)); // thin dust
       (function loop(){
         ctx.clearRect(0,0,canvas.width,canvas.height);
         particles.forEach(p=>{ p.step(); p.draw(); });
