@@ -1,234 +1,794 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>The Gold Blessing — Centered UI (Real Gem)</title>
-<style>
-  :root{
-    --col-gap: clamp(48px, 7vw, 96px);
-    --left-w: clamp(260px, 26vw, 360px);
-    --btn-h: clamp(54px, 7.2vh, 68px);
-    --btn-radius: 999px;
-    --btn-font: clamp(14px, 1.15vw, 18px);
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Gold Blessing — Layaway & Gold Calculator</title>
 
-  *{box-sizing:border-box; margin:0}
-  body{
-    min-height:100vh;
-    display:grid;
-    place-items:center;
-    background:
-      radial-gradient(1200px 600px at 60% 45%, rgba(255,255,255,.06) 0%, transparent 60%),
-      radial-gradient(800px 400px at 70% 55%, rgba(255,255,255,.03) 0%, transparent 60%),
-      linear-gradient(135deg,#0a0a0a 0%,#171717 100%);
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-    color:#f5e9c9;
-    overflow:hidden;
-    padding: clamp(16px, 3vw, 32px);
-  }
-
-  /* ===== Main centered 2-column layout ===== */
-  .frame{
-    width: min(1400px, 100%);
-    height: min(840px, 100vh - clamp(24px, 6vw, 64px));
-    margin:auto;
-    display:grid;
-    grid-template-columns: var(--left-w) 1fr;
-    align-items:center;
-    justify-items:center;
-    column-gap: var(--col-gap);
-  }
-
-  /* ===== Left stack (equal-size buttons) ===== */
-  .stack{
-    width:100%;
-    display:flex; flex-direction:column;
-    gap: clamp(12px, 2.2vh, 18px);
-  }
-  .btn{
-    height: var(--btn-h);
-    width:100%;
-    border:none; border-radius: var(--btn-radius);
-    cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    gap:10px;
-    font-weight:800; letter-spacing:.3px; font-size: var(--btn-font);
-    color:#181204;
-    background: linear-gradient(180deg,#f4e4c1 0%,#d4af37 60%, #b78b21 100%);
-    box-shadow:
-      0 6px 18px rgba(212,175,55,.32),
-      inset 0 1px 0 rgba(255,255,255,.55),
-      inset 0 -3px 6px rgba(0,0,0,.15);
-    transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
-  }
-  .btn:hover{
-    transform: translateY(-2px);
-    box-shadow:
-      0 10px 26px rgba(212,175,55,.45),
-      inset 0 1px 0 rgba(255,255,255,.6),
-      inset 0 -3px 6px rgba(0,0,0,.18);
-    filter: brightness(1.02);
-  }
-  .btn:active{ transform: translateY(0); }
-  .emoji{ font-size:1.15em; line-height:0; display:inline-grid; place-items:center; }
-
-  /* ===== Right side: ring + standing rotating diamond ===== */
-  .ring-wrap{
-    width: clamp(280px, 42vw, 520px);
-    aspect-ratio: 1/1;
-    position:relative;
-    display:grid; place-items:center;
-  }
-  .ring{
-    width:100%; height:100%; animation: spin 18s linear infinite;
-    filter: drop-shadow(0 12px 40px rgba(0,0,0,.5));
-  }
-  @keyframes spin{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
-
-  .diamond{
-    position:absolute; inset:0;
-    display:grid; place-items:center;
-    pointer-events:none;
-  }
-  .gem-wrap{
-    width: clamp(62px, 9vw, 110px);
-    height: auto;
-    transform-origin:center;
-    animation: gemSpin 6s linear infinite;
-    /* “standing” tilt */
-    transform: rotateX(12deg) rotateY(0deg);
-    filter:
-      drop-shadow(0 0 18px rgba(0, 200, 255, .7))
-      drop-shadow(0 0 36px rgba(212,175,55,.35));
-  }
-  @keyframes gemSpin{
-    0%   { transform: rotateX(12deg) rotateY(0deg); }
-    50%  { transform: rotateX(12deg) rotateY(180deg); }
-    100% { transform: rotateX(12deg) rotateY(360deg); }
-  }
-
-  /* ===== Mobile stack ===== */
-  @media (max-width: 820px){
-    .frame{
-      grid-template-columns: 1fr;
-      grid-auto-rows: max-content;
-      row-gap: clamp(28px, 6vh, 40px);
-      height: auto;
-      min-height: calc(100vh - clamp(24px, 6vw, 64px));
-      place-items:center;
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body{
+      font-family: Georgia,'Times New Roman',serif;
+      background: linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 100%);
+      min-height:100vh; padding:20px;
+      display:flex; justify-content:center; align-items:center;
+      overflow-x:hidden;
     }
-    .stack{ max-width: 420px; }
-  }
-</style>
-</head>
-<body>
 
-  <div class="frame">
-    <!-- LEFT: equal-size buttons -->
-    <div class="stack">
-      <button class="btn"><span class="emoji">🧮</span> GOLD CALCULATOR</button>
-      <button class="btn"><span class="emoji">💰</span> LAYAWAY CALCULATOR</button>
-      <button class="btn"><span class="emoji">📜</span> LAYAWAY TERMS</button>
-      <button class="btn"><span class="emoji">🌟</span> WHY CHOOSE LAYAWAY</button>
+    /* ===== Rotating “THE GOLD BLESSING” (center) + Diamond ===== */
+    .rotating-text-container{
+      position:fixed; top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      width:520px; height:520px;
+      z-index:3; pointer-events:none;
+    }
+    .rotating-text{ width:100%; height:100%; animation:spin 16s linear infinite; }
+    @keyframes spin{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+
+    .center-diamond{
+      position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      font-size:100px; line-height:1;
+      animation:pulse 2s ease-in-out infinite;
+      filter: drop-shadow(0 0 25px rgba(212,175,55,0.8))
+              drop-shadow(0 0 50px rgba(244,228,193,0.5));
+    }
+    @keyframes pulse{
+      0%   { transform:translate(-50%,-50%) scale(1);   opacity:1; }
+      50%  { transform:translate(-50%,-50%) scale(1.2); opacity:.85; }
+      100% { transform:translate(-50%,-50%) scale(1);   opacity:1; }
+    }
+
+    /* ===== Floating Buttons ===== */
+    .widget-container,.gold-container,.terms-container,.benefits-container{
+      position:fixed; z-index:1000;
+    }
+    .gold-container{ left:30px; bottom:80px; }
+    .widget-container{ right:30px; bottom:80px; }
+    .terms-container{ left:50%; bottom:30px; transform:translateX(-50%); }
+    .benefits-container{ left:50%; bottom:170px; transform:translateX(-50%); }
+
+    .toggle{
+      background: linear-gradient(135deg,#d4af37 0%,#f4e4c1 100%);
+      border:2px solid rgba(212,175,55,.6);
+      padding:10px 16px; min-height:60px;
+      border-radius:999px; cursor:pointer;
+      box-shadow:0 10px 30px rgba(212,175,55,.4);
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:1.05em; color:#0a0a0a; font-weight:800;
+      letter-spacing:.2px; text-transform:uppercase;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .toggle:hover{ transform:translateY(-2px); box-shadow:0 16px 40px rgba(212,175,55,.6); }
+    .toggle-emoji{ font-size:1.4em; line-height:1; display:inline-flex; align-items:center; }
+    .toggle-text{ line-height:1; }
+    .toggle-benefits .toggle-text{ font-size:.85em; }
+
+    /* ===== Popups ===== */
+    .box{
+      background: linear-gradient(135deg,#1a1a1a 0%,#2d2d2d 100%);
+      border:2px solid #d4af37; border-radius:20px; width:460px; max-height:80vh;
+      box-shadow:0 20px 60px rgba(212,175,55,.3);
+      display:none; position:absolute; bottom:0; overflow-y:auto; z-index:1001;
+    }
+    .box.active{ display:block; animation:slideUp .3s ease; }
+    @keyframes slideUp{ from{transform:translateY(100%);opacity:0} to{transform:translateY(0);opacity:1} }
+    .box.right{ right:0; } .box.left{ left:0; } .box.center{ left:50%; transform:translateX(-50%); }
+
+    .box-header{
+      background: linear-gradient(135deg,rgba(212,175,55,.2) 0%,rgba(212,175,55,.1) 100%);
+      padding:20px; border-bottom:1px solid rgba(212,175,55,.3); position:relative;
+    }
+    .box-title{
+      color:#d4af37; font-size:1.25em; font-weight:800; text-align:center; letter-spacing:.5px;
+    }
+    .close-btn{
+      position:absolute; top:15px; right:15px; width:30px; height:30px;
+      background:transparent; border:1px solid #d4af37; color:#d4af37;
+      border-radius:50%; cursor:pointer; font-size:1.2em;
+    }
+    .close-btn:hover{ background:#d4af37; color:#0a0a0a; }
+    .section{ padding:20px; }
+
+    /* ===== Layaway calc shared styles (kept) ===== */
+    .input{
+      width:100%; padding:12px; margin-bottom:14px;
+      background: rgba(26,26,26,.9); border:1px solid rgba(212,175,55,.3);
+      border-radius:10px; color:#f4e4c1; font-size:1.05em; font-weight:bold; text-align:center;
+    }
+    .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .btn{
+      background: linear-gradient(135deg,rgba(212,175,55,.1) 0%,rgba(212,175,55,.05) 100%);
+      border:1px solid rgba(212,175,55,.3); color:#d4af37; padding:10px; border-radius:8px;
+      cursor:pointer; font-size:.9em; text-align:center;
+    }
+    .btn:hover{ background: linear-gradient(135deg,rgba(212,175,55,.3) 0%,rgba(212,175,55,.1) 100%); }
+    .card{
+      background: rgba(0,0,0,.35); border:1px solid rgba(212,175,55,.25); border-radius:12px; padding:16px;
+    }
+    .section-title{ color:#d4af37; font-size:1em; font-weight:800; text-align:center; margin-bottom:12px; }
+    .results{
+      background: linear-gradient(135deg,rgba(212,175,55,.06) 0%, rgba(0,0,0,.32) 100%);
+      border:1px solid rgba(212,175,55,.2); border-radius:14px; padding:18px; margin:18px 0;
+    }
+    .row{ display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(212,175,55,.1); }
+    .row:last-child{ border-bottom:none; }
+    .row .k{ color:rgba(212,175,55,.85); font-size:.92em; }
+    .row .v{ color:#f4e4c1; font-weight:800; }
+
+    /* ===== Fee table ===== */
+    .fee-table{ max-height:220px; overflow-y:auto; padding:10px; background:rgba(0,0,0,.3); border-radius:10px; }
+    .fee-item{ display:grid; grid-template-columns:2fr 1fr 1fr; gap:8px; padding:8px; margin-bottom:6px;
+      background:rgba(212,175,55,.02); border-radius:6px; }
+    .fee-item span:nth-child(1){ color:rgba(212,175,55,.9); font-weight:700; }
+    .fee-item span{ color:rgba(255,255,255,.85); font-size:.88em; }
+
+    /* ===== Gold Dust layers ===== */
+    #tgb-gold-dust{ position:fixed; inset:0; pointer-events:none; z-index:1; }
+    #tgb-gold-vignette{
+      position:fixed; inset:0; pointer-events:none; z-index:2;
+      background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,.45) 100%);
+    }
+
+    /* ===== Terms/Benefits modal text helpers ===== */
+    .terms-list{ list-style:none; padding-left:10px; margin:0; color:rgba(244,228,193,.88); }
+    .terms-list li{ padding:3px 0; }
+    .terms-sect-title{ color:#d4af37; font-weight:700; margin:12px 0 6px; }
+    .terms-intro{ color:rgba(244,228,193,.88); text-align:center; margin-bottom:12px; }
+    .terms-note{
+      background:rgba(212,175,55,.1); border:1px solid rgba(212,175,55,.2);
+      border-radius:10px; padding:12px; margin-top:12px; color:rgba(244,228,193,.9); text-align:center;
+    }
+
+    /* ===== NEW Gold Calculator styles (scoped inside #goldBox) ===== */
+    #goldBox .calculator{
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      border: 2px solid #d4af37; border-radius: 20px; width: 100%;
+      box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
+    }
+    #goldBox .header{
+      background: linear-gradient(135deg, rgba(212,175,55,0.2) 0%, rgba(212,175,55,0.1) 100%);
+      padding: 16px; border-bottom: 1px solid rgba(212,175,55,0.3); border-radius: 18px 18px 0 0;
+    }
+    #goldBox .title{ color:#d4af37; font-size:1.2em; font-weight:800; text-align:center; }
+    #goldBox .content{ padding:18px; }
+    #goldBox .mode-selector{ margin-bottom:18px; }
+    #goldBox .mode-label{
+      color:#d4af37; font-size:.9em; margin-bottom:10px; display:block; text-align:center; font-weight:800;
+    }
+    #goldBox .mode-buttons{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+    #goldBox .mode-btn{
+      padding:12px; background:rgba(26,26,26,.9); border:2px solid rgba(212,175,55,.3);
+      color:#d4af37; border-radius:10px; cursor:pointer; font-weight:800; font-size:.9em; transition:all .3s;
+    }
+    #goldBox .mode-btn:hover{ background:rgba(212,175,55,.1); border-color:rgba(212,175,55,.5); }
+    #goldBox .mode-btn.active{
+      background: linear-gradient(135deg, rgba(212,175,55,.3) 0%, rgba(212,175,55,.1) 100%);
+      border-color:#d4af37; box-shadow:0 0 15px rgba(212,175,55,.3);
+    }
+    #goldBox .input-group{ margin-bottom:16px; }
+    #goldBox .input-label{ color:#d4af37; font-size:.9em; margin-bottom:8px; display:block; }
+    #goldBox .input-field{
+      width:100%; padding:14px; background:rgba(26,26,26,.9);
+      border:1px solid rgba(212,175,55,.3); border-radius:10px; color:#f4e4c1;
+      font-size:1.05em; font-weight:800; text-align:center;
+    }
+    #goldBox .input-field:focus{ outline:none; border-color:#d4af37; box-shadow:0 0 10px rgba(212,175,55,.2); }
+    #goldBox .input-field:disabled{ opacity:.4; cursor:not-allowed; }
+    #goldBox .quick-buttons{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:10px; }
+    #goldBox .quick-btn{
+      padding:8px; background: linear-gradient(135deg, rgba(212,175,55,.1) 0%, rgba(212,175,55,.05) 100%);
+      border:1px solid rgba(212,175,55,.3); color:#d4af37; border-radius:8px; cursor:pointer; font-size:.85em; font-weight:800;
+    }
+    #goldBox .quick-btn:hover{ background: linear-gradient(135deg, rgba(212,175,55,.3) 0%, rgba(212,175,55,.1) 100%); transform: translateY(-1px); }
+    #goldBox .result-box{
+      background: linear-gradient(135deg, #d4af37 0%, #f4e4c1 100%); border-radius:15px; padding:18px; margin-top:18px; text-align:center;
+    }
+    #goldBox .result-label{ color:#1a1403; font-size:.9em; margin-bottom:8px; font-weight:800; }
+    #goldBox .result-value{ color:#1a1403; font-size:1.9em; font-weight:800; margin-bottom:6px; }
+    #goldBox .result-formula{ color:#1a1403; font-size:.95em; opacity:.85; }
+    #goldBox .info-box{
+      background: rgba(212,175,55,.1); border:1px solid rgba(212,175,55,.2); border-radius:10px; padding:12px; margin-top:16px;
+    }
+    #goldBox .info-title{ color:#d4af37; font-size:.9em; margin-bottom:8px; text-align:center; font-weight:800; }
+    #goldBox .info-text{ color:rgba(244,228,193,.85); font-size:.8em; line-height:1.6; text-align:center; }
+
+    /* ===== Mobile tweaks ===== */
+    @media (max-width:520px){
+      .box{ width:calc(100vw - 40px); max-height:85vh; }
+      .gold-container{ left:16px; bottom:80px; }
+      .widget-container{ right:16px; bottom:80px; }
+      .terms-container{ left:50%; bottom:16px; transform:translateX(-50%); }
+      .benefits-container{ bottom:150px; }
+      .toggle{ min-height:50px; padding:8px 14px; font-size:.9em; }
+      .toggle-emoji{ font-size:1.2em; }
+      .toggle-text{ font-size:.8em; }
+      .rotating-text-container{ width:240px; height:240px; top:38%; }
+      .center-diamond{ font-size:72px; }
+    }
+  </style>
+</head>
+  <body>
+  <div class="main-layout">
+    <!-- LEFT SIDE: All options -->
+    <div class="left-column">
+      <!-- Gold Calculator -->
+      <div class="gold-container"> ... </div>
+
+      <!-- Layaway Calculator -->
+      <div class="widget-container"> ... </div>
+
+      <!-- Terms -->
+      <div class="terms-container"> ... </div>
+
+      <!-- Benefits -->
+      <div class="benefits-container"> ... </div>
     </div>
 
-    <!-- RIGHT: rotating ring + standing, rotating gemstone SVG -->
-    <div class="ring-wrap">
-      <svg class="ring" viewBox="0 0 320 320" aria-hidden="true">
-        <defs>
-          <path id="circle" d="M160,160 m-114,0 a114,114 0 1,1 228,0 a114,114 0 1,1 -228,0"/>
-          <linearGradient id="goldShine" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%"   stop-color="#6b5720"/>
-            <stop offset="25%"  stop-color="#d4af37"/>
-            <stop offset="50%"  stop-color="#f4e4c1"/>
-            <stop offset="75%"  stop-color="#d4af37"/>
-            <stop offset="100%" stop-color="#6b5720"/>
-            <animate attributeName="x1" values="0%;100%" dur="6s" repeatCount="indefinite"/>
-            <animate attributeName="x2" values="100%;200%" dur="6s" repeatCount="indefinite"/>
-          </linearGradient>
-        </defs>
-        <text>
-          <textPath href="#circle"
-                    fill="url(#goldShine)"
-                    font-size="24" font-weight="800"
-                    letter-spacing="7"
-                    font-family="Georgia, serif">
-            THE GOLD BLESSING • THE GOLD BLESSING •
-          </textPath>
-        </text>
-      </svg>
+    <!-- RIGHT SIDE: Rotating Logo -->
+    <div class="right-column">
+      <div class="rotating-text-container"> ... </div>
+    </div>
+  </div>
 
-      <div class="diamond" aria-hidden="true">
-        <!-- === REAL GEMSTONE SVG (faceted crystal + glow + animated shine) === -->
-        <svg class="gem-wrap" viewBox="0 0 200 260">
-          <defs>
-            <!-- Facet color gradients -->
-            <linearGradient id="facetA" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#9be8ff"/>
-              <stop offset="1" stop-color="#3ec0ff"/>
-            </linearGradient>
-            <linearGradient id="facetB" x1="1" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#66d0ff"/>
-              <stop offset="1" stop-color="#0aa9ff"/>
-            </linearGradient>
-            <linearGradient id="facetC" x1="0" y1="1" x2="1" y2="0">
-              <stop offset="0" stop-color="#c6f2ff"/>
-              <stop offset="1" stop-color="#6fd9ff"/>
-            </linearGradient>
+  <!-- Gold Dust + Vignette -->
+  <canvas id="tgb-gold-dust"></canvas>
+  <div id="tgb-gold-vignette"></div>
+</body>
 
-            <!-- Subtle outer glow -->
-            <filter id="gemGlow" x="-80%" y="-80%" width="260%" height="260%">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="b1"/>
-              <feColorMatrix in="b1" type="matrix"
-                values="0 0 0 0 0  0 0 0 0 0.7  0 0 0 0 1  0 0 0 0.6 0" result="c1"/>
-              <feMerge>
-                <feMergeNode in="c1"/><feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
+<body>
 
-            <!-- Shine mask sweeping vertically -->
-            <linearGradient id="shineGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="white" stop-opacity="0"/>
-              <stop offset="0.5" stop-color="white" stop-opacity="0.9"/>
-              <stop offset="1" stop-color="white" stop-opacity="0"/>
-            </linearGradient>
-            <mask id="shineMask">
-              <rect id="shineBand" x="-80" y="-10" width="60" height="280" fill="url(#shineGrad)">
-                <animate attributeName="x" values="-80;240" dur="2.8s" repeatCount="indefinite"/>
-              </rect>
-            </mask>
-          </defs>
+  <!-- ===== Rotating Title Ring + Diamond ===== -->
+  <div class="rotating-text-container" aria-hidden="true">
+    <svg class="rotating-text" viewBox="0 0 320 320">
+      <defs>
+        <path id="ring" d="M160,160 m-110,0 a110,110 0 1,1 220,0 a110,110 0 1,1 -220,0"></path>
+        <linearGradient id="goldShine" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#6b5720"/>
+          <stop offset="25%"  stop-color="#d4af37"/>
+          <stop offset="50%"  stop-color="#f4e4c1"/>
+          <stop offset="75%"  stop-color="#d4af37"/>
+          <stop offset="100%" stop-color="#6b5720"/>
+          <animate attributeName="x1" values="0%;100%" dur="6s" repeatCount="indefinite"/>
+          <animate attributeName="x2" values="100%;200%" dur="6s" repeatCount="indefinite"/>
+        </linearGradient>
+        <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2" result="b1"/>
+          <feGaussianBlur in="b1" stdDeviation="3" result="b2"/>
+          <feMerge><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <text filter="url(#goldGlow)">
+        <textPath href="#ring" fill="url(#goldShine)" font-size="24" font-weight="bold"
+                  letter-spacing="8" font-family="Georgia, serif">
+          THE GOLD BLESSING • THE GOLD BLESSING •
+        </textPath>
+      </text>
+    </svg>
+    <div class="center-diamond">💎</div>
+  </div>
 
-          <!-- Gem body (a tapered crystal) -->
-          <g filter="url(#gemGlow)">
-            <!-- Crown facets -->
-            <polygon points="100,10  50,45  75,80  125,80  150,45"
-                     fill="url(#facetA)"/>
-            <polygon points="50,45  30,90  75,80" fill="url(#facetB)"/>
-            <polygon points="150,45 170,90 125,80" fill="url(#facetB)"/>
-            <!-- Girdle -->
-            <polygon points="30,90  100,100  170,90 125,80 75,80"
-                     fill="url(#facetC)"/>
-            <!-- Pavilion facets (long taper) -->
-            <polygon points="30,90  100,250  100,100" fill="url(#facetA)"/>
-            <polygon points="170,90 100,250 100,100" fill="url(#facetB)"/>
-            <polygon points="30,90 100,250 170,90" fill="url(#facetC)" opacity="0.55"/>
+  <!-- ===== Gold Calculator (LEFT) — uses your new UI ===== -->
+  <div class="gold-container">
+    <button class="toggle" id="goldToggle" title="Open Gold Calculator">
+      <span class="toggle-emoji">🧮</span><span class="toggle-text">Gold Calculator</span>
+    </button>
 
-            <!-- Highlight rim -->
-            <polyline points="50,45 100,10 150,45 170,90" fill="none" stroke="#e7fbff" stroke-opacity=".85" stroke-width="2"/>
-          </g>
+    <div class="box left" id="goldBox" role="dialog" aria-modal="true" aria-label="Gold Calculator">
+      <div class="box-header">
+        <button class="close-btn" id="goldClose" aria-label="Close">×</button>
+        <div class="box-title">Gold Price Calculator</div>
+      </div>
 
-          <!-- Animated shine sweep on top -->
-          <g mask="url(#shineMask)">
-            <polygon points="100,10  50,45  75,80  125,80  150,45" fill="#ffffff" opacity=".35"/>
-            <polygon points="30,90  100,100  170,90 125,80 75,80" fill="#ffffff" opacity=".18"/>
-            <polygon points="30,90 100,250 170,90" fill="#ffffff" opacity=".10"/>
-          </g>
+      <div class="section">
+        <div class="calculator">
+          <div class="header"><h1 class="title">⚖️ Gold Price Calculator</h1></div>
+          <div class="content">
+            <!-- Mode Selection -->
+            <div class="mode-selector">
+              <label class="mode-label">SELECT CALCULATION MODE:</label>
+              <div class="mode-buttons">
+                <button class="mode-btn active" data-mode="total">TOTAL ₱</button>
+                <button class="mode-btn" data-mode="weight">WEIGHT</button>
+                <button class="mode-btn" data-mode="rate">₱/GRAM</button>
+              </div>
+            </div>
+
+            <!-- Inputs -->
+            <div class="input-group">
+              <label class="input-label">Gold Rate (₱ per gram)</label>
+              <input type="number" class="input-field" id="rateInput" value="3500" step="1">
+            </div>
+
+            <div class="input-group">
+              <label class="input-label">Weight (grams)</label>
+              <input type="number" class="input-field" id="weightInput" value="10" step="0.1">
+              <div class="quick-buttons">
+                <button class="quick-btn" data-weight="1">1g</button>
+                <button class="quick-btn" data-weight="5">5g</button>
+                <button class="quick-btn" data-weight="10">10g</button>
+                <button class="quick-btn" data-weight="20">20g</button>
+                <button class="quick-btn" data-weight="50">50g</button>
+                <button class="quick-btn" data-weight="100">100g</button>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label class="input-label">Total Price (₱)</label>
+              <input type="number" class="input-field" id="totalInput" value="35000" step="1" disabled>
+            </div>
+
+            <!-- Result -->
+            <div class="result-box">
+              <div class="result-label">CALCULATED RESULT</div>
+              <div class="result-value" id="resultValue">₱35,000</div>
+              <div class="result-formula" id="resultFormula">₱3,500 × 10g = ₱35,000</div>
+            </div>
+
+            <!-- Info -->
+            <div class="info-box">
+              <div class="info-title">💡 How to Use</div>
+              <div class="info-text">
+                <strong>TOTAL ₱:</strong> Enter rate and weight to calculate total price<br>
+                <strong>WEIGHT:</strong> Enter rate and total to calculate grams needed<br>
+                <strong>₱/GRAM:</strong> Enter weight and total to calculate rate per gram
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /section -->
+    </div>
+  </div>
+
+  <!-- ===== Layaway Calculator (RIGHT) — unchanged math/details ===== -->
+  <div class="widget-container">
+    <button class="toggle" id="layToggle" title="Open Layaway Calculator">
+      <span class="toggle-emoji" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 640 512" fill="#b8860b">
+          <path d="M480 160H160L64 352h512L480 160zM0 416h640v64H0V416z"/>
         </svg>
+      </span>
+      <span class="toggle-text">Layaway Calculator</span>
+    </button>
+
+    <div class="box right" id="layBox" role="dialog" aria-modal="true" aria-label="Layaway Calculator">
+      <div class="box-header">
+        <button class="close-btn" id="layClose" aria-label="Close">×</button>
+        <div class="box-title">Layaway Calculator</div>
+      </div>
+
+      <div class="section">
+        <input type="number" class="input" id="priceInput" placeholder="Enter Item Price" value="20000">
+
+        <div class="grid3" style="margin-bottom:16px;">
+          <button class="btn" data-price="5000">₱5K</button>
+          <button class="btn" data-price="10000">₱10K</button>
+          <button class="btn" data-price="20000">₱20K</button>
+        </div>
+        <div class="grid3" style="margin-top:-10px; margin-bottom:20px;">
+          <button class="btn" data-price="30000">₱30K</button>
+          <button class="btn" data-price="50000">₱50K</button>
+          <button class="btn" data-price="100000">₱100K</button>
+        </div>
+
+        <div class="card" style="margin-bottom:18px;">
+          <div class="section-title">SELECT PAYMENT OPTION</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+            <div class="option-card selected" data-option="a" style="background:rgba(26,26,26,.9); border:2px solid rgba(212,175,55,.3); border-radius:10px; padding:14px; cursor:pointer;">
+              <div class="section-title" style="margin:0 0 10px 0;">OPTION A</div>
+              <ul style="list-style:none; padding:0; margin:0; color:#f4e4c1; font-size:.9em;">
+                <li><strong style="color:#d4af37;">Initial Deposit:</strong> 50% of total amount</li>
+                <li><strong style="color:#d4af37;">Service Fee:</strong> 5% of merchandise value</li>
+                <li><strong style="color:#d4af37;">Payment Period:</strong> Open-ended</li>
+                <li style="background:rgba(212,175,55,.15); border:1px solid rgba(212,175,55,.3); padding:6px; border-radius:6px; margin-top:6px;">
+                  <strong style="color:#d4af37;">Storage Charges:</strong> FREE for 60 days
+                </li>
+              </ul>
+            </div>
+
+            <div class="option-card" data-option="b" style="background:rgba(26,26,26,.9); border:2px solid rgba(212,175,55,.3); border-radius:10px; padding:14px; cursor:pointer;">
+              <div class="section-title" style="margin:0 0 10px 0;">OPTION B</div>
+              <ul style="list-style:none; padding:0; margin:0; color:#f4e4c1; font-size:.9em;">
+                <li><strong style="color:#d4af37;">Initial Deposit:</strong> 20% of total amount</li>
+                <li><strong style="color:#d4af37;">Service Fee:</strong> 10% of merchandise value</li>
+                <li><strong style="color:#d4af37;">Payment Period:</strong> Open-ended</li>
+                <li style="background:rgba(212,175,55,.15); border:1px solid rgba(212,175,55,.3); padding:6px; border-radius:6px; margin-top:6px;">
+                  <strong style="color:#d4af37;">Storage Charges:</strong> FREE for 60 days
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment breakdown -->
+        <div class="results">
+          <div class="section-title" style="margin-bottom:10px;">PAYMENT BREAKDOWN</div>
+          <div class="row"><span class="k">Item Price</span><span class="v" id="itemPrice">₱20,000</span></div>
+          <div class="row"><span class="k">Service Fee</span><span class="v" id="serviceFee">₱1,000</span></div>
+          <div class="row"><span class="k">Total Contract</span><span class="v" id="totalContract">₱21,000</span></div>
+          <div class="row"><span class="k">Down Payment</span><span class="v" id="downPayment">₱10,500</span></div>
+          <div class="row"><span class="k">Balance to Pay</span><span class="v" id="balance">₱10,500</span></div>
+        </div>
+
+        <!-- Storage fees -->
+        <div class="results">
+          <div class="section-title" style="margin-bottom:10px;">STORAGE FEES (After 60 Days)</div>
+          <div class="row"><span class="k">Daily Storage Rate</span><span class="v" id="dailyRate">₱60</span></div>
+          <div class="row"><span class="k">If 30 Days Late</span><span class="v" id="day30Late">₱1,800</span></div>
+          <div class="row"><span class="k">If 60 Days Late</span><span class="v" id="day60Late">₱3,600</span></div>
+          <div class="row"><span class="k">If 90 Days Late</span><span class="v" id="day90Late">₱5,400</span></div>
+        </div>
+
+        <!-- Fee table (full, unchanged) -->
+        <div class="fee-table">
+          <div class="fee-item"><span>₱1K - ₱3K</span><span>₱5/day</span><span>₱150/mo</span></div>
+          <div class="fee-item"><span>₱3K - ₱5K</span><span>₱10/day</span><span>₱300/mo</span></div>
+          <div class="fee-item"><span>₱5K - ₱7.5K</span><span>₱15/day</span><span>₱450/mo</span></div>
+          <div class="fee-item"><span>₱7.5K - ₱10K</span><span>₱25/day</span><span>₱750/mo</span></div>
+          <div class="fee-item"><span>₱10K - ₱15K</span><span>₱30/day</span><span>₱900/mo</span></div>
+          <div class="fee-item"><span>₱15K - ₱20K</span><span>₱45/day</span><span>₱1,350/mo</span></div>
+          <div class="fee-item"><span>₱20K - ₱25K</span><span>₱60/day</span><span>₱1,800/mo</span></div>
+          <div class="fee-item"><span>₱25K - ₱30K</span><span>₱75/day</span><span>₱2,250/mo</span></div>
+          <div class="fee-item"><span>₱30K - ₱40K</span><span>₱90/day</span><span>₱2,700/mo</span></div>
+          <div class="fee-item"><span>₱40K - ₱50K</span><span>₱120/day</span><span>₱3,600/mo</span></div>
+          <div class="fee-item"><span>₱50K - ₱60K</span><span>₱150/day</span><span>₱4,500/mo</span></div>
+          <div class="fee-item"><span>₱60K - ₱75K</span><span>₱180/day</span><span>₱5,400/mo</span></div>
+          <div class="fee-item"><span>₱75K - ₱90K</span><span>₱225/day</span><span>₱6,750/mo</span></div>
+          <div class="fee-item"><span>₱90K - ₱100K</span><span>₱270/day</span><span>₱8,100/mo</span></div>
+          <div class="fee-item"><span>₱100K - ₱200K</span><span>₱300/day</span><span>₱9,000/mo</span></div>
+          <div class="fee-item"><span>₱200K+</span><span>₱600/day</span><span>₱18,000/mo</span></div>
+        </div>
+      </div>
+
+      <!-- Benefits footer (unchanged content) -->
+      <div class="section" style="padding-top:0;">
+        <div class="card" style="background:rgba(212,175,55,.1); border:1px solid rgba(212,175,55,.2);">
+          <h4 style="color:#d4af37; text-align:center; margin-bottom:8px;">🌹 The Gold Blessing Promise</h4>
+          <p style="color:rgba(244,228,193,.9); text-align:center; margin:0;">
+            Our layaway service fee is a <strong style="color:#d4af37;">one-time, non-refundable investment</strong> that ensures your jewelry journey is safe, flexible, and worry-free.
+          </p>
+          <p style="color:#d4af37; font-weight:800; text-align:center; margin:10px 0 0;">
+            👉 Start your layaway today and make your dream jewelry exclusively yours—on your terms.
+          </p>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- ===== Layaway Terms (center-bottom) ===== -->
+  <div class="terms-container">
+    <button class="toggle" id="termsToggle" title="Open Layaway Terms">
+      <span class="toggle-emoji" aria-hidden="true">
+        <!-- golden paper icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="26" height="26" fill="url(#goldGradient)">
+          <defs>
+            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"  stop-color="#f4e4c1"/><stop offset="50%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8c6f26"/>
+            </linearGradient>
+          </defs>
+          <path d="M224 0H64C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160L224 0zM256 160V48l112 112H256zM80 272c0-8.8 7.2-16 16-16H288c8.8 0 16 7.2 16 16s-7.2 16-16 16H96c-8.8 0-16-7.2-16-16zm16 64H288c8.8 0 16 7.2 16 16s-7.2 16-16 16H96c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0-160H208c8.8 0 16 7.2 16 16H96c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/>
+        </svg>
+      </span>
+      <span class="toggle-text">Layaway Terms</span>
+    </button>
+
+    <div class="box center" id="termsBox" role="dialog" aria-modal="true" aria-label="Layaway Terms & Conditions">
+      <div class="box-header">
+        <button class="close-btn" id="termsClose" aria-label="Close">×</button>
+        <div class="box-title" style="font-size:1.05em;">📜 Layaway Terms & Conditions</div>
+      </div>
+
+      <div class="section">
+        <p class="terms-intro">
+          At <strong style="color:#d4af37;">The Gold Blessing</strong>, we believe in <strong style="color:#d4af37;">clarity, flexibility, and trust</strong>.
+          Here are the guidelines that safeguard your layaway journey:
+        </p>
+
+        <div class="terms-sect-title">💰 Payment Terms</div>
+        <ul class="terms-list">
+          <li>• The service fee is non-refundable</li>
+          <li>• 60-day grace period from contract date</li>
+          <li>• Daily storage fees apply after grace period</li>
+          <li>• Partial payments minimum ₱500</li>
+        </ul>
+
+        <div class="terms-sect-title">⚠️ Default & Abandonment</div>
+        <ul class="terms-list">
+          <li>• Storage fees equal to item value</li>
+          <li>• No payment for 3 consecutive months</li>
+          <li>• Customer cancellation request</li>
+          <li>• All deposits forfeited upon abandonment</li>
+          <li>• Abandoned merchandise returns to available inventory</li>
+        </ul>
+
+        <div class="terms-sect-title">👑 Customer Rights</div>
+        <ul class="terms-list">
+          <li>• Price protection against upward adjustments</li>
+          <li>• Access to payment history and balance inquiry</li>
+          <li>• Option to accelerate payment without penalty</li>
+        </ul>
+
+        <div class="terms-sect-title">💳 Payment Methods</div>
+        <ul class="terms-list">
+          <li>💵 Cash payments at store premises</li>
+          <li>🏦 Electronic transfers / Bank deposits and transfers</li>
+          <li>💳 Credit and debit card payments</li>
+        </ul>
+
+        <div class="terms-note">
+          ✨ Our layaway program is crafted to give you <strong style="color:#d4af37;">exclusive access, peace of mind, and luxury-level service</strong>—because your dream jewelry deserves nothing less.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Why Choose Layaway (above terms) ===== -->
+  <div class="benefits-container">
+    <button class="toggle toggle-benefits" id="benefitsToggle" title="Why Choose Layaway">
+      <span class="toggle-emoji" aria-hidden="true">🌟</span>
+      <span class="toggle-text">Why Choose Layaway</span>
+    </button>
+
+    <div class="box center" id="benefitsBox" role="dialog" aria-modal="true" aria-label="Why Choose Layaway at The Gold Blessing">
+      <div class="box-header">
+        <button class="close-btn" id="benefitsClose" aria-label="Close">×</button>
+        <div class="box-title">🌟 Why Choose Layaway at The Gold Blessing?</div>
+      </div>
+
+      <div class="section">
+        <p style="color:rgba(244,228,193,.88); text-align:center; margin-bottom:16px;">
+          At <strong style="color:#d4af37;">The Gold Blessing</strong>, layaway isn’t just about paying in parts—it’s about <strong style="color:#d4af37;">peace of mind, exclusivity, and luxury-level service</strong>.
+          Here’s what makes our layaway program truly golden:
+        </p>
+
+        <div class="terms-sect-title">✨ Merchandise Management</div>
+        <ul class="terms-list">
+          <li>• <strong style="color:#d4af37;">Exclusive Reservation</strong> – Your chosen jewelry is held just for you.</li>
+          <li>• <strong style="color:#d4af37;">Price Lock Guarantee</strong> – Secure today’s gold rate, shielded from market changes.</li>
+          <li>• <strong style="color:#d4af37;">Quality Assurance</strong> – Stored and inspected with utmost care.</li>
+        </ul>
+
+        <div class="terms-sect-title">💛 Customer Services</div>
+        <ul class="terms-list">
+          <li>• <strong style="color:#d4af37;">Flexible Payments</strong> – Partial payments accepted.</li>
+          <li>• <strong style="color:#d4af37;">Grace Period Privilege</strong> – Enjoy 60 days of free, secure storage.</li>
+        </ul>
+
+        <div class="terms-sect-title">📑 Account Administration</div>
+        <ul class="terms-list">
+          <li>• <strong style="color:#d4af37;">Seamless Processing</strong> – Multiple safe and convenient channels.</li>
+          <li>• <strong style="color:#d4af37;">Real-Time Monitoring</strong> – Track your balance and history anytime.</li>
+        </ul>
+
+        <div class="terms-sect-title">🛡 Risk Mitigation</div>
+        <ul class="terms-list">
+          <li>• <strong style="color:#d4af37;">Protected Inventory</strong> – Insurance safeguards your piece while in storage.</li>
+          <li>• <strong style="color:#d4af37;">Extended Reservation</strong> – No strict cut-off—your dream piece waits for you.</li>
+        </ul>
+
+        <div class="terms-sect-title">🕊 Peace of Mind</div>
+        <ul class="terms-list">
+          <li>• <strong style="color:#d4af37;">No Hidden Fees</strong> – Transparent terms, no surprises.</li>
+          <li>• <strong style="color:#d4af37;">Secure Handling</strong> – Every item stored in premium, insured vault conditions.</li>
+        </ul>
+
+        <div class="terms-sect-title">🎁 Added Warmth</div>
+        <ul class="terms-list">
+          <li>• <strong style="color:#d4af37;">Surprise Perks</strong> – Occasional raffles, exclusive discounts, or freebies for loyal layaway clients.</li>
+          <li>• <strong style="color:#d4af37;">Celebration Ready</strong> – Option to have your jewelry gift-wrapped when fully paid.</li>
+        </ul>
+
+        <div class="terms-note">
+          🌹 <strong>The Gold Blessing Promise</strong><br><br>
+          Our layaway service fee is a <strong style="color:#d4af37;">one-time, non-refundable investment</strong> that ensures your jewelry journey is <strong style="color:#d4af37;">safe, flexible, and worry-free</strong>.<br><br>
+          👉 <strong>Start your layaway today</strong> and make your dream jewelry exclusively yours—on your terms.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Gold Dust + Vignette ===== -->
+  <canvas id="tgb-gold-dust" aria-hidden="true"></canvas>
+  <div id="tgb-gold-vignette" aria-hidden="true"></div>
+
+  <script>
+    /* Helpers */
+    const peso = n => '₱' + Number(n || 0).toLocaleString('en-PH',{maximumFractionDigits:0});
+
+    /* Open/close: Gold */
+    const goldToggle = document.getElementById('goldToggle');
+    const goldBox    = document.getElementById('goldBox');
+    const goldClose  = document.getElementById('goldClose');
+    goldToggle.addEventListener('click', ()=>{ goldBox.classList.add('active'); goldToggle.style.display='none'; });
+    goldClose .addEventListener('click', ()=>{ goldBox.classList.remove('active'); goldToggle.style.display='inline-flex'; });
+
+    /* Open/close: Layaway */
+    const layToggle = document.getElementById('layToggle');
+    const layBox    = document.getElementById('layBox');
+    const layClose  = document.getElementById('layClose');
+    layToggle.addEventListener('click', ()=>{ layBox.classList.add('active'); layToggle.style.display='none'; });
+    layClose .addEventListener('click', ()=>{ layBox.classList.remove('active'); layToggle.style.display='inline-flex'; });
+
+    /* Open/close: Terms */
+    const termsToggle = document.getElementById('termsToggle');
+    const termsBox    = document.getElementById('termsBox');
+    const termsClose  = document.getElementById('termsClose');
+    termsToggle.addEventListener('click', ()=>{ termsBox.classList.add('active'); termsToggle.style.display='none'; });
+    termsClose .addEventListener('click', ()=>{ termsBox.classList.remove('active'); termsToggle.style.display='inline-flex'; });
+
+    /* Open/close: Benefits */
+    const benefitsToggle = document.getElementById('benefitsToggle');
+    const benefitsBox    = document.getElementById('benefitsBox');
+    const benefitsClose  = document.getElementById('benefitsClose');
+    benefitsToggle.addEventListener('click', ()=>{ benefitsBox.classList.add('active'); benefitsToggle.style.display='none'; });
+    benefitsClose .addEventListener('click', ()=>{ benefitsBox.classList.remove('active'); benefitsToggle.style.display='inline-flex'; });
+
+    /* ==== NEW GOLD CALCULATOR LOGIC (your code) ==== */
+    (function(){
+      const rateInput   = document.getElementById('rateInput');
+      const weightInput = document.getElementById('weightInput');
+      const totalInput  = document.getElementById('totalInput');
+      const resultValue   = document.getElementById('resultValue');
+      const resultFormula = document.getElementById('resultFormula');
+      const modeBtns = document.querySelectorAll('#goldBox .mode-btn');
+      const quickBtns = document.querySelectorAll('#goldBox .quick-btn');
+
+      let currentMode = 'total';
+
+      function formatNumber(num){ return Number(num).toLocaleString('en-PH', { maximumFractionDigits: 0 }); }
+      function formatDecimal(num, d=2){ return Number(num).toFixed(d); }
+
+      function updateFieldStates(){
+        rateInput.disabled = weightInput.disabled = totalInput.disabled = false;
+        if (currentMode==='total') totalInput.disabled = true;
+        if (currentMode==='weight') weightInput.disabled = true;
+        if (currentMode==='rate') rateInput.disabled = true;
+      }
+
+      function calculate(){
+        const rate = parseFloat(rateInput.value) || 0;
+        const weight = parseFloat(weightInput.value) || 0;
+        const total = parseFloat(totalInput.value) || 0;
+
+        if (currentMode==='total'){
+          const t = rate * weight;
+          totalInput.value = Math.round(t);
+          resultValue.textContent = '₱' + formatNumber(t);
+          resultFormula.textContent = `₱${formatNumber(rate)} × ${weight}g = ₱${formatNumber(t)}`;
+        } else if (currentMode==='weight'){
+          const w = rate>0 ? total/rate : 0;
+          weightInput.value = formatDecimal(w,2);
+          resultValue.textContent = formatDecimal(w,2) + ' grams';
+          resultFormula.textContent = `₱${formatNumber(total)} ÷ ₱${formatNumber(rate)}/g = ${formatDecimal(w,2)}g`;
+        } else {
+          const r = weight>0 ? total/weight : 0;
+          rateInput.value = Math.round(r);
+          resultValue.textContent = '₱' + formatNumber(r) + '/gram';
+          resultFormula.textContent = `₱${formatNumber(total)} ÷ ${weight}g = ₱${formatNumber(r)}/g`;
+        }
+      }
+
+      modeBtns.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          modeBtns.forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+          currentMode = btn.dataset.mode;
+          updateFieldStates(); calculate();
+        });
+      });
+
+      quickBtns.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          if (!weightInput.disabled){
+            weightInput.value = btn.dataset.weight;
+            calculate();
+          }
+        });
+      });
+
+      ['input'].forEach(evt=>{
+        rateInput.addEventListener(evt, calculate);
+        weightInput.addEventListener(evt, calculate);
+        totalInput.addEventListener(evt, calculate);
+      });
+
+      updateFieldStates(); calculate();
+    })();
+
+    /* ==== LAYAWAY CALC LOGIC (unchanged) ==== */
+    (function(){
+      const priceInput = document.getElementById('priceInput');
+      document.querySelectorAll('#layBox .btn[data-price]').forEach(b=>{
+        b.addEventListener('click', ()=>{ priceInput.value = b.dataset.price; calcLayaway(); });
+      });
+
+      const optionCards = document.querySelectorAll('#layBox .option-card');
+      optionCards.forEach(card=>{
+        card.addEventListener('click', ()=>{
+          optionCards.forEach(c=>c.classList.remove('selected'));
+          card.classList.add('selected'); calcLayaway();
+        });
+      });
+
+      const tiers = [
+        { min: 1000, max: 2999, fee: 5 },   { min: 3000, max: 4999, fee: 10 },
+        { min: 5000, max: 7499, fee: 15 },  { min: 7500, max: 9999, fee: 25 },
+        { min: 10000, max: 14999, fee: 30 },{ min: 15000, max: 19999, fee: 45 },
+        { min: 20000, max: 24999, fee: 60 },{ min: 25000, max: 29999, fee: 75 },
+        { min: 30000, max: 39999, fee: 90 },{ min: 40000, max: 49999, fee: 120 },
+        { min: 50000, max: 59999, fee: 150 },{ min: 60000, max: 74999, fee: 180 },
+        { min: 75000, max: 89999, fee: 225 },{ min: 90000, max: 99999, fee: 270 },
+        { min: 100000, max: 199999, fee: 300 },{ min: 200000, max: 999999999, fee: 600 }
+      ];
+
+      const el = id => document.getElementById(id);
+      function calcLayaway(){
+        const price = Math.max(0, parseFloat(priceInput.value)||0);
+        const sel = document.querySelector('#layBox .option-card.selected');
+        const isA = sel?.dataset.option === 'a';
+        const feeRate = isA ? 0.05 : 0.10;
+        const dpRate  = isA ? 0.50 : 0.20;
+
+        const serviceFee = price * feeRate;
+        const total = price + serviceFee;
+        const down  = total * dpRate;
+        const bal   = total - down;
+
+        let daily = 0;
+        for (const t of tiers){ if (price >= t.min && price <= t.max){ daily = t.fee; break; } }
+
+        el('itemPrice').textContent     = peso(price);
+        el('serviceFee').textContent    = peso(serviceFee);
+        el('totalContract').textContent = peso(total);
+        el('downPayment').textContent   = peso(down);
+        el('balance').textContent       = peso(bal);
+        el('dailyRate').textContent     = peso(daily);
+        el('day30Late').textContent     = peso(daily*30);
+        el('day60Late').textContent     = peso(daily*60);
+        el('day90Late').textContent     = peso(daily*90);
+      }
+      priceInput.addEventListener('input', calcLayaway);
+      calcLayaway();
+    })();
+
+    /* ==== Thin Gold Dust Background ==== */
+    (function(){
+      const canvas = document.getElementById('tgb-gold-dust');
+      const ctx = canvas.getContext('2d');
+      function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+      resize(); addEventListener('resize', resize);
+
+      class Particle{
+        constructor(first=false){ this.reset(first); }
+        reset(first=false){
+          this.x = Math.random() * canvas.width;
+          this.y = first ? Math.random() * canvas.height : -10;
+          this.r = Math.random() * 1.5 + 0.5;
+          this.vx = Math.random() * 1 - 0.5;
+          this.vy = Math.random() * 1 + 0.4;
+          this.a  = Math.random() * 0.4 + 0.2;
+          this.t  = Math.random() * Math.PI * 2;
+        }
+        step(){
+          this.x += this.vx; this.y += this.vy; this.t += 0.05;
+          if (this.y > canvas.height + 10 || this.x < -10 || this.x > canvas.width + 10) this.reset();
+        }
+        draw(){
+          const op = Math.max(0, Math.min(1, this.a + Math.sin(this.t)*0.2));
+          const g = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.r*2.6);
+          g.addColorStop(0, `rgba(244,228,193,${op})`);
+          g.addColorStop(0.5,`rgba(212,175,55,${op})`);
+          g.addColorStop(1, `rgba(212,175,55,0)`);
+          ctx.fillStyle=g; ctx.beginPath(); ctx.arc(this.x,this.y,this.r*2.2,0,Math.PI*2); ctx.fill();
+        }
+      }
+      const particles = Array.from({length: 60}, ()=>new Particle(true)); // thin, elegant
+      (function loop(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p=>{ p.step(); p.draw(); });
+        requestAnimationFrame(loop);
+      })();
+    })();
+  </script>
 </body>
 </html>
