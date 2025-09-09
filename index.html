@@ -3,695 +3,285 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Gold Blessing — Emerald Luxury Collection</title>
+  <title>The Gold Blessing — Layaway & Gold Calculator</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Crimson+Text:wght@400;600;700&display=swap');
-    
     * { margin:0; padding:0; box-sizing:border-box; }
-    
     body{
-      font-family: 'Crimson Text', 'Georgia', serif;
-      background: linear-gradient(135deg, #0a1f1f 0%, #1a3333 50%, #0d2626 100%);
-      min-height:100vh; 
-      padding:20px;
-      display:flex; 
-      justify-content:center; 
-      align-items:center;
+      font-family: Georgia,'Times New Roman',serif;
+      background: linear-gradient(135deg,#0a1f1f 0%,#1a3333 50%,#0d2626 100%);
+      min-height:100vh; padding:20px;
+      display:flex; justify-content:center; align-items:center;
       overflow-x:hidden;
+      position: relative;
     }
 
-    /* ===== Rotating Text with Emerald Glow ===== */
+    /* ===== Rotating "THE GOLD BLESSING" (center) + Diamond ===== */
     .rotating-text-container{
-      position:fixed; 
-      top:50%; 
-      left:50%;
+      position:fixed; top:50%; left:50%;
       transform:translate(-50%,-50%);
-      width:520px; 
-      height:520px;
-      z-index:3; 
-      pointer-events:none;
+      width:520px; height:520px;
+      z-index:3; pointer-events:none;
     }
-    
-    .rotating-text{ 
-      width:100%; 
-      height:100%; 
-      animation:spin 20s linear infinite; 
-    }
-    
-    @keyframes spin{ 
-      from{transform:rotate(0)} 
-      to{transform:rotate(360deg)} 
-    }
+    .rotating-text{ width:100%; height:100%; animation:spin 16s linear infinite; }
+    @keyframes spin{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
 
     .center-diamond{
-      position:absolute; 
-      top:50%; 
-      left:50%;
+      position:absolute; top:50%; left:50%;
       transform:translate(-50%,-50%);
-      font-size:100px; 
-      line-height:1;
-      animation:pulse 3s ease-in-out infinite;
-      filter: drop-shadow(0 0 30px rgba(16, 185, 129, 0.7))
-              drop-shadow(0 0 60px rgba(212, 175, 55, 0.4));
+      font-size:100px; line-height:1;
+      animation:pulse 2s ease-in-out infinite;
+      filter: drop-shadow(0 0 25px rgba(16,185,129,0.8))
+              drop-shadow(0 0 50px rgba(244,228,193,0.5));
     }
-    
     @keyframes pulse{
-      0%   { transform:translate(-50%,-50%) scale(1); opacity:1; }
-      50%  { transform:translate(-50%,-50%) scale(1.15); opacity:.9; }
-      100% { transform:translate(-50%,-50%) scale(1); opacity:1; }
+      0%   { transform:translate(-50%,-50%) scale(1);   opacity:1; }
+      50%  { transform:translate(-50%,-50%) scale(1.2); opacity:.85; }
+      100% { transform:translate(-50%,-50%) scale(1);   opacity:1; }
     }
 
-    /* ===== Floating Buttons - Emerald & Gold ===== */
+    /* ===== Floating Buttons - Desktop Layout ===== */
     .widget-container,.gold-container,.terms-container,.benefits-container{
-      position:fixed; 
-      z-index:1000;
+      position:fixed; z-index:1000;
     }
     
-    .gold-container{ left:30px; bottom:80px; }
-    .widget-container{ right:30px; bottom:80px; }
-    .terms-container{ left:50%; bottom:30px; transform:translateX(-50%); }
-    .benefits-container{ left:50%; bottom:170px; transform:translateX(-50%); }
+    /* Desktop positioning */
+    @media (min-width: 1024px) {
+      .gold-container{ left:30px; bottom:50%; transform:translateY(50%); }
+      .widget-container{ right:30px; bottom:50%; transform:translateY(50%); }
+      .terms-container{ left:50%; bottom:100px; transform:translateX(-50%); }
+      .benefits-container{ left:50%; bottom:180px; transform:translateX(-50%); }
+    }
+    
+    /* Mobile/Tablet positioning */
+    @media (max-width: 1023px) {
+      .gold-container{ left:30px; bottom:80px; }
+      .widget-container{ right:30px; bottom:80px; }
+      .terms-container{ left:50%; bottom:30px; transform:translateX(-50%); }
+      .benefits-container{ left:50%; bottom:170px; transform:translateX(-50%); }
+    }
 
     .toggle{
-      background: linear-gradient(135deg, #10b981 0%, #065f46 50%, #10b981 100%);
-      border: 2px solid rgba(212, 175, 55, 0.8);
-      padding:12px 20px; 
-      min-height:60px;
-      border-radius:999px; 
-      cursor:pointer;
-      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3),
-                  0 5px 15px rgba(212, 175, 55, 0.2);
-      display:inline-flex; 
-      align-items:center; 
-      gap:12px;
-      font-family: 'Playfair Display', serif;
-      font-size:1.05em; 
-      color:#f4e4c1; 
-      font-weight:700;
-      letter-spacing:1px; 
-      text-transform:uppercase;
-      transition: all .3s ease;
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(135deg,#10b981 0%,#065f46 50%,#10b981 100%);
+      border:2px solid rgba(212,175,55,.6);
+      padding:10px 16px; min-height:60px;
+      border-radius:999px; cursor:pointer;
+      box-shadow:0 10px 30px rgba(16,185,129,.4);
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:1.05em; color:#f4e4c1; font-weight:800;
+      letter-spacing:.2px; text-transform:uppercase;
+      transition: transform .25s ease, box-shadow .25s ease;
     }
-    
-    .toggle::before {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: linear-gradient(45deg, #d4af37, #10b981, #d4af37);
-      border-radius: 999px;
-      opacity: 0;
-      z-index: -1;
-      transition: opacity 0.3s ease;
-    }
-    
-    .toggle:hover::before { opacity: 1; }
-    .toggle:hover{ 
-      transform:translateY(-3px); 
-      box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4),
-                  0 8px 20px rgba(212, 175, 55, 0.3);
-    }
-    
-    .toggle-emoji{ font-size:1.4em; line-height:1; }
+    .toggle:hover{ transform:translateY(-2px); box-shadow:0 16px 40px rgba(16,185,129,.6); }
+    .toggle-emoji{ font-size:1.4em; line-height:1; display:inline-flex; align-items:center; }
     .toggle-text{ line-height:1; }
+    .toggle-benefits .toggle-text{ font-size:.85em; }
 
-    /* ===== Popups - Emerald Luxury ===== */
+    /* ===== Backdrop for mobile ===== */
+    .backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 999;
+    }
+    .backdrop.active { display: block; }
+
+    /* ===== Popups ===== */
     .box{
-      background: linear-gradient(135deg, #0a1f1f 0%, #1a3333 100%);
-      border: 2px solid transparent;
-      background-clip: padding-box;
-      position: relative;
-      border-radius:24px; 
-      width:480px; 
-      max-height:85vh;
-      box-shadow: 0 25px 70px rgba(16, 185, 129, 0.25),
-                  0 10px 30px rgba(212, 175, 55, 0.15);
-      display:none; 
-      position:absolute; 
-      bottom:0; 
-      overflow-y:auto; 
-      z-index:1001;
+      background: linear-gradient(135deg,#0a1f1f 0%,#1a3333 100%);
+      border:2px solid #10b981; border-radius:20px; width:460px; max-height:80vh;
+      box-shadow:0 20px 60px rgba(16,185,129,.3);
+      display:none; position:fixed; overflow-y:auto; z-index:5;
     }
     
-    .box::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      border-radius: 24px;
-      padding: 2px;
-      background: linear-gradient(135deg, #d4af37, #10b981, #d4af37);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: destination-out;
-      mask-composite: exclude;
-      z-index: -1;
+    /* Desktop positioning for boxes */
+    @media (min-width: 1024px) {
+      .box.left { left: 30px; top: 50%; transform: translateY(-50%); }
+      .box.right { right: 30px; top: 50%; transform: translateY(-50%); }
+      .box.center { left: 50%; top: 50%; transform: translate(-50%, -50%); }
     }
     
-    .box.active{ 
-      display:block; 
-      animation:slideUp .4s ease; 
+    /* Mobile positioning - centered overlay */
+    @media (max-width: 1023px) {
+      .box {
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        bottom: auto !important;
+        right: auto !important;
+        width: calc(100vw - 40px);
+        max-width: 460px;
+        max-height: 90vh;
+      }
     }
     
-    @keyframes slideUp{ 
-      from{transform:translateY(100%); opacity:0} 
-      to{transform:translateY(0); opacity:1} 
-    }
-    
-    .box.right{ right:0; } 
-    .box.left{ left:0; } 
-    .box.center{ left:50%; transform:translateX(-50%); }
+    .box.active{ display:block; animation:slideUp .3s ease; }
+    @keyframes slideUp{ from{opacity:0; transform:scale(0.9)} to{opacity:1; transform:scale(1)} }
 
     .box-header{
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(212, 175, 55, 0.1) 100%);
-      padding:22px; 
-      border-bottom:1px solid rgba(212, 175, 55, 0.3); 
-      position:relative;
-      border-radius: 22px 22px 0 0;
+      background: linear-gradient(135deg,rgba(16,185,129,.2) 0%,rgba(212,175,55,.1) 100%);
+      padding:20px; border-bottom:1px solid rgba(212,175,55,.3); position:relative;
     }
-    
     .box-title{
-      font-family: 'Playfair Display', serif;
-      background: linear-gradient(135deg, #d4af37, #10b981);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-size:1.4em; 
-      font-weight:900; 
-      text-align:center; 
-      letter-spacing:1px;
+      color:#d4af37; font-size:1.25em; font-weight:800; text-align:center; letter-spacing:.5px;
     }
-    
     .close-btn{
-      position:absolute; 
-      top:18px; 
-      right:18px; 
-      width:32px; 
-      height:32px;
-      background: rgba(16, 185, 129, 0.1); 
-      border:1px solid #10b981; 
-      color:#10b981;
-      border-radius:50%; 
-      cursor:pointer; 
-      font-size:1.3em;
-      transition: all 0.3s ease;
-      font-family: 'Playfair Display', serif;
+      position:absolute; top:15px; right:15px; width:30px; height:30px;
+      background:transparent; border:1px solid #10b981; color:#10b981;
+      border-radius:50%; cursor:pointer; font-size:1.2em;
     }
-    
-    .close-btn:hover{ 
-      background:#10b981; 
-      color:#0a1f1f; 
-      transform: rotate(90deg);
-    }
-    
-    .section{ padding:22px; }
+    .close-btn:hover{ background:#10b981; color:#0a1f1f; }
+    .section{ padding:20px; }
 
-    /* ===== Shared Input Styles ===== */
+    /* ===== Layaway calc shared styles ===== */
     .input{
-      width:100%; 
-      padding:14px; 
-      margin-bottom:16px;
-      background: rgba(10, 31, 31, 0.7); 
-      border:1px solid rgba(16, 185, 129, 0.3);
-      border-radius:12px; 
-      color:#f4e4c1; 
-      font-size:1.1em; 
-      font-weight:600; 
-      text-align:center;
-      font-family: 'Crimson Text', serif;
-      transition: all 0.3s ease;
+      width:100%; padding:12px; margin-bottom:14px;
+      background: rgba(10,31,31,.9); border:1px solid rgba(16,185,129,.3);
+      border-radius:10px; color:#f4e4c1; font-size:1.05em; font-weight:bold; text-align:center;
     }
-    
-    .input:focus {
-      outline: none;
-      border-color: #d4af37;
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-    }
-    
-    .grid3{ 
-      display:grid; 
-      grid-template-columns:repeat(3,1fr); 
-      gap:10px; 
-    }
-    
+    .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
     .btn{
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
-      border:1px solid rgba(16, 185, 129, 0.4); 
-      color:#10b981; 
-      padding:12px; 
-      border-radius:10px;
-      cursor:pointer; 
-      font-size:.95em; 
-      text-align:center;
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-      transition: all 0.3s ease;
+      background: linear-gradient(135deg,rgba(16,185,129,.1) 0%,rgba(212,175,55,.05) 100%);
+      border:1px solid rgba(16,185,129,.3); color:#10b981; padding:10px; border-radius:8px;
+      cursor:pointer; font-size:.9em; text-align:center;
     }
-    
-    .btn:hover{ 
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(212, 175, 55, 0.15) 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(16, 185, 129, 0.2);
-    }
-    
+    .btn:hover{ background: linear-gradient(135deg,rgba(16,185,129,.3) 0%,rgba(212,175,55,.1) 100%); }
     .card{
-      background: linear-gradient(135deg, rgba(10, 31, 31, 0.6) 0%, rgba(16, 185, 129, 0.05) 100%);
-      border:1px solid rgba(212, 175, 55, 0.3); 
-      border-radius:14px; 
-      padding:18px;
-      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+      background: rgba(0,0,0,.35); border:1px solid rgba(16,185,129,.25); border-radius:12px; padding:16px;
     }
-    
-    .section-title{ 
-      font-family: 'Playfair Display', serif;
-      background: linear-gradient(135deg, #d4af37, #10b981);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-size:1.05em; 
-      font-weight:700; 
-      text-align:center; 
-      margin-bottom:14px; 
-      letter-spacing: 0.5px;
-    }
-    
+    .section-title{ color:#10b981; font-size:1em; font-weight:800; text-align:center; margin-bottom:12px; }
     .results{
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(10, 31, 31, 0.6) 100%);
-      border:1px solid rgba(212, 175, 55, 0.3); 
-      border-radius:16px; 
-      padding:20px; 
-      margin:20px 0;
-      box-shadow: inset 0 2px 15px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(135deg,rgba(16,185,129,.06) 0%, rgba(0,0,0,.32) 100%);
+      border:1px solid rgba(16,185,129,.2); border-radius:14px; padding:18px; margin:18px 0;
     }
-    
-    .row{ 
-      display:flex; 
-      justify-content:space-between; 
-      padding:10px 0; 
-      border-bottom:1px solid rgba(16, 185, 129, 0.1); 
-    }
-    
+    .row{ display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(16,185,129,.1); }
     .row:last-child{ border-bottom:none; }
-    .row .k{ 
-      color:#10b981; 
-      font-size:.95em; 
-      font-weight: 600;
-    }
-    .row .v{ 
-      color:#d4af37; 
-      font-weight:700; 
-      font-family: 'Playfair Display', serif;
-    }
+    .row .k{ color:rgba(16,185,129,.85); font-size:.92em; }
+    .row .v{ color:#d4af37; font-weight:800; }
 
     /* ===== Fee table ===== */
-    .fee-table{ 
-      max-height:240px; 
-      overflow-y:auto; 
-      padding:12px; 
-      background: rgba(10, 31, 31, 0.5); 
-      border-radius:12px; 
-      border: 1px solid rgba(16, 185, 129, 0.2);
-    }
-    
-    .fee-item{ 
-      display:grid; 
-      grid-template-columns:2fr 1fr 1fr; 
-      gap:10px; 
-      padding:10px; 
-      margin-bottom:8px;
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, transparent 100%); 
-      border-radius:8px;
-      border: 1px solid rgba(212, 175, 55, 0.15);
-    }
-    
-    .fee-item span:nth-child(1){ 
-      color:#10b981; 
-      font-weight:600; 
-    }
-    .fee-item span{ 
-      color:rgba(244, 228, 193, 0.9); 
-      font-size:.9em; 
-    }
+    .fee-table{ max-height:220px; overflow-y:auto; padding:10px; background:rgba(0,0,0,.3); border-radius:10px; }
+    .fee-item{ display:grid; grid-template-columns:2fr 1fr 1fr; gap:8px; padding:8px; margin-bottom:6px;
+      background:rgba(16,185,129,.02); border-radius:6px; }
+    .fee-item span:nth-child(1){ color:rgba(16,185,129,.9); font-weight:700; }
+    .fee-item span{ color:rgba(255,255,255,.85); font-size:.88em; }
 
-    /* ===== Gold Dust with Emerald Tint ===== */
-    #tgb-gold-dust{ 
-      position:fixed; 
-      inset:0; 
-      pointer-events:none; 
-      z-index:1; 
-    }
-    
+    /* ===== Gold Dust layers ===== */
+    #tgb-gold-dust{ position:fixed; inset:0; pointer-events:none; z-index:1; }
     #tgb-gold-vignette{
-      position:fixed; 
-      inset:0; 
-      pointer-events:none; 
-      z-index:2;
-      background: radial-gradient(circle at center, transparent 0%, rgba(10, 31, 31, 0.5) 100%);
+      position:fixed; inset:0; pointer-events:none; z-index:2;
+      background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,.45) 100%);
     }
 
-    /* ===== Terms/Benefits styling ===== */
-    .terms-list{ 
-      list-style:none; 
-      padding-left:12px; 
-      margin:0; 
-      color:rgba(244, 228, 193, 0.9); 
-      font-size: 1.05em;
-    }
-    
-    .terms-list li{ 
-      padding:5px 0; 
-      font-family: 'Crimson Text', serif;
-    }
-    
-    .terms-sect-title{ 
-      font-family: 'Playfair Display', serif;
-      background: linear-gradient(135deg, #d4af37, #10b981);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-weight:700; 
-      margin:14px 0 8px; 
-      font-size: 1.1em;
-    }
-    
-    .terms-intro{ 
-      color:rgba(244, 228, 193, 0.9); 
-      text-align:center; 
-      margin-bottom:14px; 
-      font-size: 1.05em;
-      font-family: 'Crimson Text', serif;
-    }
-    
+    /* ===== Terms/Benefits modal text helpers ===== */
+    .terms-list{ list-style:none; padding-left:10px; margin:0; color:rgba(244,228,193,.88); }
+    .terms-list li{ padding:3px 0; }
+    .terms-sect-title{ color:#10b981; font-weight:700; margin:12px 0 6px; }
+    .terms-intro{ color:rgba(244,228,193,.88); text-align:center; margin-bottom:12px; }
     .terms-note{
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(212, 175, 55, 0.08) 100%);
-      border:1px solid rgba(212, 175, 55, 0.3);
-      border-radius:12px; 
-      padding:14px; 
-      margin-top:14px; 
-      color:rgba(244, 228, 193, 0.95); 
-      text-align:center;
-      font-family: 'Crimson Text', serif;
-      font-size: 1.05em;
+      background:rgba(16,185,129,.1); border:1px solid rgba(16,185,129,.2);
+      border-radius:10px; padding:12px; margin-top:12px; color:rgba(244,228,193,.9); text-align:center;
     }
 
-    /* ===== Gold Calculator specific ===== */
+    /* ===== Gold Calculator styles ===== */
     #goldBox .calculator{
       background: linear-gradient(135deg, #0a1f1f 0%, #1a3333 100%);
-      border: 2px solid transparent;
-      border-radius: 20px;
-      width: 100%;
-      position: relative;
+      border: 2px solid #10b981; border-radius: 20px; width: 100%;
+      box-shadow: 0 20px 60px rgba(16, 185, 129, 0.3);
     }
-    
-    #goldBox .calculator::before {
-      content: '';
-      position: absolute;
-      top: -2px; left: -2px; right: -2px; bottom: -2px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #d4af37, #10b981);
-      z-index: -1;
-    }
-    
     #goldBox .header{
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(212, 175, 55, 0.1) 100%);
-      padding: 18px;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-      border-radius: 18px 18px 0 0;
+      background: linear-gradient(135deg, rgba(16,185,129,0.2) 0%, rgba(212,175,55,0.1) 100%);
+      padding: 16px; border-bottom: 1px solid rgba(212,175,55,0.3); border-radius: 18px 18px 0 0;
     }
-    
-    #goldBox .title{ 
-      font-family: 'Playfair Display', serif;
-      background: linear-gradient(135deg, #d4af37, #10b981);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-size:1.3em; 
-      font-weight:900; 
-      text-align:center; 
-    }
-    
-    #goldBox .content{ padding:20px; }
-    
-    #goldBox .mode-selector{ margin-bottom:20px; }
-    
+    #goldBox .title{ color:#d4af37; font-size:1.2em; font-weight:800; text-align:center; }
+    #goldBox .content{ padding:18px; }
+    #goldBox .mode-selector{ margin-bottom:18px; }
     #goldBox .mode-label{
-      color:#10b981; 
-      font-size:.95em; 
-      margin-bottom:12px; 
-      display:block; 
-      text-align:center; 
-      font-weight:600;
-      font-family: 'Playfair Display', serif;
-      letter-spacing: 0.5px;
+      color:#10b981; font-size:.9em; margin-bottom:10px; display:block; text-align:center; font-weight:800;
     }
-    
-    #goldBox .mode-buttons{ 
-      display:grid; 
-      grid-template-columns:1fr 1fr 1fr; 
-      gap:12px; 
-    }
-    
+    #goldBox .mode-buttons{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
     #goldBox .mode-btn{
-      padding:14px;
-      background: rgba(10, 31, 31, 0.8);
-      border:2px solid rgba(16, 185, 129, 0.3);
-      color:#10b981;
-      border-radius:12px;
-      cursor:pointer;
-      font-weight:700;
-      font-size:.95em;
-      transition:all .3s;
-      font-family: 'Playfair Display', serif;
+      padding:12px; background:rgba(10,31,31,.9); border:2px solid rgba(16,185,129,.3);
+      color:#10b981; border-radius:10px; cursor:pointer; font-weight:800; font-size:.9em; transition:all .3s;
     }
-    
-    #goldBox .mode-btn:hover{
-      background: rgba(16, 185, 129, 0.1);
-      border-color: rgba(212, 175, 55, 0.5);
-    }
-    
+    #goldBox .mode-btn:hover{ background:rgba(16,185,129,.1); border-color:rgba(16,185,129,.5); }
     #goldBox .mode-btn.active{
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(212, 175, 55, 0.1) 100%);
-      border-color:#d4af37;
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-      color: #d4af37;
+      background: linear-gradient(135deg, rgba(16,185,129,.3) 0%, rgba(212,175,55,.1) 100%);
+      border-color:#d4af37; box-shadow:0 0 15px rgba(212,175,55,.3);
     }
-    
-    #goldBox .input-group{ margin-bottom:18px; }
-    
-    #goldBox .input-label{
-      color:#10b981;
-      font-size:.95em;
-      margin-bottom:10px;
-      display:block;
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-    }
-    
+    #goldBox .input-group{ margin-bottom:16px; }
+    #goldBox .input-label{ color:#10b981; font-size:.9em; margin-bottom:8px; display:block; }
     #goldBox .input-field{
-      width:100%;
-      padding:16px;
-      background: rgba(10, 31, 31, 0.8);
-      border:1px solid rgba(16, 185, 129, 0.3);
-      border-radius:12px;
-      color:#f4e4c1;
-      font-size:1.1em;
-      font-weight:700;
-      text-align:center;
-      font-family: 'Crimson Text', serif;
-      transition: all 0.3s ease;
+      width:100%; padding:14px; background:rgba(10,31,31,.9);
+      border:1px solid rgba(16,185,129,.3); border-radius:10px; color:#f4e4c1;
+      font-size:1.05em; font-weight:800; text-align:center;
     }
-    
-    #goldBox .input-field:focus{
-      outline:none;
-      border-color:#d4af37;
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
-    }
-    
-    #goldBox .input-field:disabled{
-      opacity:.5;
-      cursor:not-allowed;
-    }
-    
-    #goldBox .quick-buttons{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-      margin-top:12px;
-    }
-    
+    #goldBox .input-field:focus{ outline:none; border-color:#d4af37; box-shadow:0 0 10px rgba(212,175,55,.2); }
+    #goldBox .input-field:disabled{ opacity:.4; cursor:not-allowed; }
+    #goldBox .quick-buttons{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:10px; }
     #goldBox .quick-btn{
-      padding:10px;
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
-      border:1px solid rgba(16, 185, 129, 0.4);
-      color:#10b981;
-      border-radius:10px;
-      cursor:pointer;
-      font-size:.9em;
-      font-weight:600;
-      font-family: 'Playfair Display', serif;
-      transition: all 0.3s ease;
+      padding:8px; background: linear-gradient(135deg, rgba(16,185,129,.1) 0%, rgba(212,175,55,.05) 100%);
+      border:1px solid rgba(16,185,129,.3); color:#10b981; border-radius:8px; cursor:pointer; font-size:.85em; font-weight:800;
     }
-    
-    #goldBox .quick-btn:hover{
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(212, 175, 55, 0.15) 100%);
-      transform: translateY(-2px);
-      color: #d4af37;
-    }
-    
+    #goldBox .quick-btn:hover{ background: linear-gradient(135deg, rgba(16,185,129,.3) 0%, rgba(212,175,55,.1) 100%); transform: translateY(-1px); }
     #goldBox .result-box{
-      background: linear-gradient(135deg, #10b981 0%, #065f46 50%, #10b981 100%);
-      border: 2px solid #d4af37;
-      border-radius:16px;
-      padding:20px;
-      margin-top:20px;
-      text-align:center;
-      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+      background: linear-gradient(135deg, #10b981 0%, #065f46 100%); border-radius:15px; padding:18px; margin-top:18px; text-align:center;
     }
-    
-    #goldBox .result-label{
-      color:#f4e4c1;
-      font-size:.95em;
-      margin-bottom:10px;
-      font-weight:600;
-      font-family: 'Playfair Display', serif;
-      letter-spacing: 1px;
-    }
-    
-    #goldBox .result-value{
-      color:#f4e4c1;
-      font-size:2.1em;
-      font-weight:900;
-      margin-bottom:8px;
-      font-family: 'Playfair Display', serif;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    }
-    
-    #goldBox .result-formula{
-      color:#f4e4c1;
-      font-size:1em;
-      opacity:.9;
-      font-family: 'Crimson Text', serif;
-    }
-    
+    #goldBox .result-label{ color:#0a1f1f; font-size:.9em; margin-bottom:8px; font-weight:800; }
+    #goldBox .result-value{ color:#0a1f1f; font-size:1.9em; font-weight:800; margin-bottom:6px; }
+    #goldBox .result-formula{ color:#0a1f1f; font-size:.95em; opacity:.85; }
     #goldBox .info-box{
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(212, 175, 55, 0.08) 100%);
-      border:1px solid rgba(212, 175, 55, 0.3);
-      border-radius:12px;
-      padding:14px;
-      margin-top:18px;
+      background: rgba(16,185,129,.1); border:1px solid rgba(16,185,129,.2); border-radius:10px; padding:12px; margin-top:16px;
     }
-    
-    #goldBox .info-title{
-      color:#d4af37;
-      font-size:.95em;
-      margin-bottom:10px;
-      text-align:center;
-      font-weight:700;
-      font-family: 'Playfair Display', serif;
-    }
-    
-    #goldBox .info-text{
-      color:rgba(244, 228, 193, 0.9);
-      font-size:.85em;
-      line-height:1.7;
-      text-align:center;
-      font-family: 'Crimson Text', serif;
-    }
+    #goldBox .info-title{ color:#10b981; font-size:.9em; margin-bottom:8px; text-align:center; font-weight:800; }
+    #goldBox .info-text{ color:rgba(244,228,193,.85); font-size:.8em; line-height:1.6; text-align:center; }
 
-    /* Option Cards - Emerald styling */
-    .option-card {
-      background: linear-gradient(135deg, rgba(10, 31, 31, 0.8) 0%, rgba(16, 185, 129, 0.05) 100%);
-      border: 2px solid rgba(16, 185, 129, 0.3);
-      border-radius: 12px;
-      padding: 16px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .option-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 20px rgba(16, 185, 129, 0.2);
-    }
-    
-    .option-card.selected {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%);
-      border-color: #d4af37;
-      box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
-    }
-    
-    .option-card ul li {
-      font-family: 'Crimson Text', serif;
-      font-size: 0.95em;
-      margin-bottom: 4px;
-    }
-
-    /* Scrollbar styling */
-    .box::-webkit-scrollbar,
-    .fee-table::-webkit-scrollbar {
-      width: 8px;
-    }
-    
-    .box::-webkit-scrollbar-track,
-    .fee-table::-webkit-scrollbar-track {
-      background: rgba(10, 31, 31, 0.5);
-      border-radius: 10px;
-    }
-    
-    .box::-webkit-scrollbar-thumb,
-    .fee-table::-webkit-scrollbar-thumb {
-      background: linear-gradient(135deg, #10b981, #d4af37);
-      border-radius: 10px;
-    }
-    
-    .box::-webkit-scrollbar-thumb:hover,
-    .fee-table::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(135deg, #d4af37, #10b981);
-    }
-
-    /* Mobile adjustments */
+    /* ===== Mobile tweaks ===== */
     @media (max-width:520px){
-      .box{ width:calc(100vw - 40px); max-height:85vh; }
       .gold-container{ left:16px; bottom:80px; }
       .widget-container{ right:16px; bottom:80px; }
       .terms-container{ left:50%; bottom:16px; transform:translateX(-50%); }
       .benefits-container{ bottom:150px; }
-      .toggle{ min-height:52px; padding:10px 16px; font-size:.95em; }
-      .toggle-emoji{ font-size:1.25em; }
-      .toggle-text{ font-size:.85em; }
-      .rotating-text-container{ width:260px; height:260px; top:40%; }
-      .center-diamond{ font-size:80px; }
+      .toggle{ min-height:50px; padding:8px 14px; font-size:.9em; }
+      .toggle-emoji{ font-size:1.2em; }
+      .toggle-text{ font-size:.8em; }
+      .rotating-text-container{ width:240px; height:240px; top:38%; }
+      .center-diamond{ font-size:72px; }
     }
   </style>
 </head>
+  <body>
 
-<body>
+  <!-- ===== Backdrop for mobile ===== -->
+  <div class="backdrop" id="backdrop"></div>
 
-  <!-- ===== Rotating Title Ring + Emerald Diamond ===== -->
+  <!-- ===== Rotating Title Ring + Diamond ===== -->
   <div class="rotating-text-container" aria-hidden="true">
     <svg class="rotating-text" viewBox="0 0 320 320">
       <defs>
         <path id="ring" d="M160,160 m-110,0 a110,110 0 1,1 220,0 a110,110 0 1,1 -220,0"></path>
-        <linearGradient id="emeraldGoldShine" x1="0%" y1="0%" x2="100%" y2="0%">
+        <linearGradient id="goldShine" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%"   stop-color="#065f46"/>
           <stop offset="25%"  stop-color="#10b981"/>
           <stop offset="50%"  stop-color="#d4af37"/>
           <stop offset="75%"  stop-color="#10b981"/>
           <stop offset="100%" stop-color="#065f46"/>
-          <animate attributeName="x1" values="0%;100%" dur="8s" repeatCount="indefinite"/>
-          <animate attributeName="x2" values="100%;200%" dur="8s" repeatCount="indefinite"/>
+          <animate attributeName="x1" values="0%;100%" dur="6s" repeatCount="indefinite"/>
+          <animate attributeName="x2" values="100%;200%" dur="6s" repeatCount="indefinite"/>
         </linearGradient>
-        <filter id="emeraldGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="3" result="b1"/>
-          <feGaussianBlur in="b1" stdDeviation="4" result="b2"/>
+        <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2" result="b1"/>
+          <feGaussianBlur in="b1" stdDeviation="3" result="b2"/>
           <feMerge><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
       </defs>
-      <text filter="url(#emeraldGlow)">
-        <textPath href="#ring" fill="url(#emeraldGoldShine)" font-size="24" font-weight="bold"
-                  letter-spacing="8" font-family="Playfair Display, serif">
+      <text filter="url(#goldGlow)">
+        <textPath href="#ring" fill="url(#goldShine)" font-size="24" font-weight="bold"
+                  letter-spacing="8" font-family="Georgia, serif">
           THE GOLD BLESSING • THE GOLD BLESSING •
         </textPath>
       </text>
@@ -774,7 +364,11 @@
   <!-- ===== Layaway Calculator (RIGHT) ===== -->
   <div class="widget-container">
     <button class="toggle" id="layToggle" title="Open Layaway Calculator">
-      <span class="toggle-emoji" aria-hidden="true">📦</span>
+      <span class="toggle-emoji" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 640 512" fill="#f4e4c1">
+          <path d="M480 160H160L64 352h512L480 160zM0 416h640v64H0V416z"/>
+        </svg>
+      </span>
       <span class="toggle-text">Layaway Calculator</span>
     </button>
 
@@ -801,25 +395,25 @@
         <div class="card" style="margin-bottom:18px;">
           <div class="section-title">SELECT PAYMENT OPTION</div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-            <div class="option-card selected" data-option="a">
+            <div class="option-card selected" data-option="a" style="background:rgba(10,31,31,.9); border:2px solid rgba(16,185,129,.3); border-radius:10px; padding:14px; cursor:pointer;">
               <div class="section-title" style="margin:0 0 10px 0;">OPTION A</div>
-              <ul style="list-style:none; padding:0; margin:0; color:#f4e4c1;">
+              <ul style="list-style:none; padding:0; margin:0; color:#f4e4c1; font-size:.9em;">
                 <li><strong style="color:#d4af37;">Initial Deposit:</strong> 50% of total amount</li>
                 <li><strong style="color:#d4af37;">Service Fee:</strong> 5% of merchandise value</li>
                 <li><strong style="color:#d4af37;">Payment Period:</strong> Open-ended</li>
-                <li style="background:rgba(16, 185, 129, 0.15); border:1px solid rgba(212, 175, 55, 0.3); padding:6px; border-radius:6px; margin-top:6px;">
+                <li style="background:rgba(16,185,129,.15); border:1px solid rgba(212,175,55,.3); padding:6px; border-radius:6px; margin-top:6px;">
                   <strong style="color:#d4af37;">Storage Charges:</strong> FREE for 60 days
                 </li>
               </ul>
             </div>
 
-            <div class="option-card" data-option="b">
+            <div class="option-card" data-option="b" style="background:rgba(10,31,31,.9); border:2px solid rgba(16,185,129,.3); border-radius:10px; padding:14px; cursor:pointer;">
               <div class="section-title" style="margin:0 0 10px 0;">OPTION B</div>
-              <ul style="list-style:none; padding:0; margin:0; color:#f4e4c1;">
+              <ul style="list-style:none; padding:0; margin:0; color:#f4e4c1; font-size:.9em;">
                 <li><strong style="color:#d4af37;">Initial Deposit:</strong> 20% of total amount</li>
                 <li><strong style="color:#d4af37;">Service Fee:</strong> 10% of merchandise value</li>
                 <li><strong style="color:#d4af37;">Payment Period:</strong> Open-ended</li>
-                <li style="background:rgba(16, 185, 129, 0.15); border:1px solid rgba(212, 175, 55, 0.3); padding:6px; border-radius:6px; margin-top:6px;">
+                <li style="background:rgba(16,185,129,.15); border:1px solid rgba(212,175,55,.3); padding:6px; border-radius:6px; margin-top:6px;">
                   <strong style="color:#d4af37;">Storage Charges:</strong> FREE for 60 days
                 </li>
               </ul>
@@ -869,12 +463,12 @@
 
       <!-- Benefits footer -->
       <div class="section" style="padding-top:0;">
-        <div class="card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(212, 175, 55, 0.08) 100%); border:1px solid rgba(212, 175, 55, 0.3);">
-          <h4 style="font-family: 'Playfair Display', serif; background: linear-gradient(135deg, #d4af37, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-align:center; margin-bottom:10px;">🌹 The Gold Blessing Promise</h4>
-          <p style="color:rgba(244, 228, 193, 0.95); text-align:center; margin:0; font-family: 'Crimson Text', serif; font-size: 1.05em;">
+        <div class="card" style="background:rgba(16,185,129,.1); border:1px solid rgba(16,185,129,.2);">
+          <h4 style="color:#d4af37; text-align:center; margin-bottom:8px;">🌹 The Gold Blessing Promise</h4>
+          <p style="color:rgba(244,228,193,.9); text-align:center; margin:0;">
             Our layaway service fee is a <strong style="color:#d4af37;">one-time, non-refundable investment</strong> that ensures your jewelry journey is safe, flexible, and worry-free.
           </p>
-          <p style="color:#d4af37; font-weight:700; text-align:center; margin:12px 0 0; font-family: 'Playfair Display', serif;">
+          <p style="color:#d4af37; font-weight:800; text-align:center; margin:10px 0 0;">
             👉 Start your layaway today and make your dream jewelry exclusively yours—on your terms.
           </p>
         </div>
@@ -885,14 +479,23 @@
   <!-- ===== Layaway Terms (center-bottom) ===== -->
   <div class="terms-container">
     <button class="toggle" id="termsToggle" title="Open Layaway Terms">
-      <span class="toggle-emoji" aria-hidden="true">📜</span>
+      <span class="toggle-emoji" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="26" height="26" fill="url(#goldGradient)">
+          <defs>
+            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"  stop-color="#d4af37"/><stop offset="50%" stop-color="#10b981"/><stop offset="100%" stop-color="#065f46"/>
+            </linearGradient>
+          </defs>
+          <path d="M224 0H64C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160L224 0zM256 160V48l112 112H256zM80 272c0-8.8 7.2-16 16-16H288c8.8 0 16 7.2 16 16s-7.2 16-16 16H96c-8.8 0-16-7.2-16-16zm16 64H288c8.8 0 16 7.2 16 16s-7.2 16-16 16H96c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0-160H208c8.8 0 16 7.2 16 16H96c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/>
+        </svg>
+      </span>
       <span class="toggle-text">Layaway Terms</span>
     </button>
 
     <div class="box center" id="termsBox" role="dialog" aria-modal="true" aria-label="Layaway Terms & Conditions">
       <div class="box-header">
         <button class="close-btn" id="termsClose" aria-label="Close">×</button>
-        <div class="box-title">📜 Layaway Terms & Conditions</div>
+        <div class="box-title" style="font-size:1.05em;">📜 Layaway Terms & Conditions</div>
       </div>
 
       <div class="section">
@@ -906,7 +509,7 @@
           <li>• The service fee is non-refundable</li>
           <li>• 60-day grace period from contract date</li>
           <li>• Daily storage fees apply after grace period</li>
-          <li>• Partial payments no minimum </li>
+          <li>• Partial payments minimum ₱500</li>
         </ul>
 
         <div class="terms-sect-title">⚠️ Default & Abandonment</div>
@@ -949,12 +552,13 @@
     <div class="box center" id="benefitsBox" role="dialog" aria-modal="true" aria-label="Why Choose Layaway at The Gold Blessing">
       <div class="box-header">
         <button class="close-btn" id="benefitsClose" aria-label="Close">×</button>
-        <div class="box-title">🌟 Why Choose Layaway?</div>
+        <div class="box-title">🌟 Why Choose Layaway at The Gold Blessing?</div>
       </div>
 
       <div class="section">
-        <p style="color:rgba(244, 228, 193, 0.9); text-align:center; margin-bottom:18px; font-family: 'Crimson Text', serif; font-size: 1.05em;">
+        <p style="color:rgba(244,228,193,.88); text-align:center; margin-bottom:16px;">
           At <strong style="color:#d4af37;">The Gold Blessing</strong>, layaway isn't just about paying in parts—it's about <strong style="color:#d4af37;">peace of mind, exclusivity, and luxury-level service</strong>.
+          Here's what makes our layaway program truly golden:
         </p>
 
         <div class="terms-sect-title">✨ Merchandise Management</div>
@@ -976,6 +580,24 @@
           <li>• <strong style="color:#d4af37;">Real-Time Monitoring</strong> – Track your balance and history anytime.</li>
         </ul>
 
+        <div class="terms-sect-title">🛡 Risk Mitigation</div>
+        <ul class="terms-list">
+          <li>• <strong style="color:#d4af37;">Protected Inventory</strong> – Insurance safeguards your piece while in storage.</li>
+          <li>• <strong style="color:#d4af37;">Extended Reservation</strong> – No strict cut-off—your dream piece waits for you.</li>
+        </ul>
+
+        <div class="terms-sect-title">🕊 Peace of Mind</div>
+        <ul class="terms-list">
+          <li>• <strong style="color:#d4af37;">No Hidden Fees</strong> – Transparent terms, no surprises.</li>
+          <li>• <strong style="color:#d4af37;">Secure Handling</strong> – Every item stored in premium, insured vault conditions.</li>
+        </ul>
+
+        <div class="terms-sect-title">🎁 Added Warmth</div>
+        <ul class="terms-list">
+          <li>• <strong style="color:#d4af37;">Surprise Perks</strong> – Occasional raffles, exclusive discounts, or freebies for loyal layaway clients.</li>
+          <li>• <strong style="color:#d4af37;">Celebration Ready</strong> – Option to have your jewelry gift-wrapped when fully paid.</li>
+        </ul>
+
         <div class="terms-note">
           🌹 <strong>The Gold Blessing Promise</strong><br><br>
           Our layaway service fee is a <strong style="color:#d4af37;">one-time, non-refundable investment</strong> that ensures your jewelry journey is <strong style="color:#d4af37;">safe, flexible, and worry-free</strong>.<br><br>
@@ -985,43 +607,95 @@
     </div>
   </div>
 
-  <!-- ===== Gold Dust with Emerald Particles ===== -->
+  <!-- ===== Gold Dust + Vignette ===== -->
   <canvas id="tgb-gold-dust" aria-hidden="true"></canvas>
   <div id="tgb-gold-vignette" aria-hidden="true"></div>
 
   <script>
     /* Helpers */
     const peso = n => '₱' + Number(n || 0).toLocaleString('en-PH',{maximumFractionDigits:0});
+    
+    /* Backdrop for mobile */
+    const backdrop = document.getElementById('backdrop');
+    const isMobile = window.innerWidth < 1024;
+    
+    /* Function to close all boxes */
+    function closeAllBoxes() {
+      document.querySelectorAll('.box').forEach(box => box.classList.remove('active'));
+      document.querySelectorAll('.toggle').forEach(btn => btn.style.display='inline-flex');
+      if(isMobile) backdrop.classList.remove('active');
+    }
 
     /* Open/close: Gold */
     const goldToggle = document.getElementById('goldToggle');
     const goldBox    = document.getElementById('goldBox');
     const goldClose  = document.getElementById('goldClose');
-    goldToggle.addEventListener('click', ()=>{ goldBox.classList.add('active'); goldToggle.style.display='none'; });
-    goldClose .addEventListener('click', ()=>{ goldBox.classList.remove('active'); goldToggle.style.display='inline-flex'; });
+    goldToggle.addEventListener('click', ()=>{ 
+      closeAllBoxes(); // Close other boxes first
+      goldBox.classList.add('active'); 
+      if(isMobile) backdrop.classList.add('active');
+      goldToggle.style.display='none'; 
+    });
+    goldClose.addEventListener('click', ()=>{ 
+      goldBox.classList.remove('active'); 
+      if(isMobile) backdrop.classList.remove('active');
+      goldToggle.style.display='inline-flex'; 
+    });
 
     /* Open/close: Layaway */
     const layToggle = document.getElementById('layToggle');
     const layBox    = document.getElementById('layBox');
     const layClose  = document.getElementById('layClose');
-    layToggle.addEventListener('click', ()=>{ layBox.classList.add('active'); layToggle.style.display='none'; });
-    layClose .addEventListener('click', ()=>{ layBox.classList.remove('active'); layToggle.style.display='inline-flex'; });
+    layToggle.addEventListener('click', ()=>{ 
+      closeAllBoxes(); // Close other boxes first
+      layBox.classList.add('active'); 
+      if(isMobile) backdrop.classList.add('active');
+      layToggle.style.display='none'; 
+    });
+    layClose.addEventListener('click', ()=>{ 
+      layBox.classList.remove('active'); 
+      if(isMobile) backdrop.classList.remove('active');
+      layToggle.style.display='inline-flex'; 
+    });
 
     /* Open/close: Terms */
     const termsToggle = document.getElementById('termsToggle');
     const termsBox    = document.getElementById('termsBox');
     const termsClose  = document.getElementById('termsClose');
-    termsToggle.addEventListener('click', ()=>{ termsBox.classList.add('active'); termsToggle.style.display='none'; });
-    termsClose .addEventListener('click', ()=>{ termsBox.classList.remove('active'); termsToggle.style.display='inline-flex'; });
+    termsToggle.addEventListener('click', ()=>{ 
+      closeAllBoxes(); // Close other boxes first
+      termsBox.classList.add('active'); 
+      if(isMobile) backdrop.classList.add('active');
+      termsToggle.style.display='none'; 
+    });
+    termsClose.addEventListener('click', ()=>{ 
+      termsBox.classList.remove('active'); 
+      if(isMobile) backdrop.classList.remove('active');
+      termsToggle.style.display='inline-flex'; 
+    });
 
     /* Open/close: Benefits */
     const benefitsToggle = document.getElementById('benefitsToggle');
     const benefitsBox    = document.getElementById('benefitsBox');
     const benefitsClose  = document.getElementById('benefitsClose');
-    benefitsToggle.addEventListener('click', ()=>{ benefitsBox.classList.add('active'); benefitsToggle.style.display='none'; });
-    benefitsClose .addEventListener('click', ()=>{ benefitsBox.classList.remove('active'); benefitsToggle.style.display='inline-flex'; });
+    benefitsToggle.addEventListener('click', ()=>{ 
+      closeAllBoxes(); // Close other boxes first
+      benefitsBox.classList.add('active'); 
+      if(isMobile) backdrop.classList.add('active');
+      benefitsToggle.style.display='none'; 
+    });
+    benefitsClose.addEventListener('click', ()=>{ 
+      benefitsBox.classList.remove('active'); 
+      if(isMobile) backdrop.classList.remove('active');
+      benefitsToggle.style.display='inline-flex'; 
+    });
+    
+    /* Close on backdrop click */
+    backdrop.addEventListener('click', ()=>{
+      closeAllBoxes();
+    });
 
-    /* ==== GOLD CALCULATOR LOGIC ==== */
+    /* ==== NEW GOLD CALCULATOR LOGIC ==== */
     (function(){
       const rateInput   = document.getElementById('rateInput');
       const weightInput = document.getElementById('weightInput');
@@ -1149,7 +823,7 @@
       calcLayaway();
     })();
 
-    /* ==== Emerald & Gold Dust Background ==== */
+    /* ==== Gold Dust Background with Emerald tint ==== */
     (function(){
       const canvas = document.getElementById('tgb-gold-dust');
       const ctx = canvas.getContext('2d');
@@ -1158,46 +832,38 @@
 
       class Particle{
         constructor(first=false){ 
-          this.reset(first);
-          // Randomly choose between emerald and gold
+          this.reset(first); 
           this.isEmerald = Math.random() > 0.5;
         }
         reset(first=false){
           this.x = Math.random() * canvas.width;
           this.y = first ? Math.random() * canvas.height : -10;
-          this.r = Math.random() * 1.8 + 0.6;
-          this.vx = Math.random() * 1.2 - 0.6;
-          this.vy = Math.random() * 1.2 + 0.5;
-          this.a  = Math.random() * 0.5 + 0.3;
+          this.r = Math.random() * 1.5 + 0.5;
+          this.vx = Math.random() * 1 - 0.5;
+          this.vy = Math.random() * 1 + 0.4;
+          this.a  = Math.random() * 0.4 + 0.2;
           this.t  = Math.random() * Math.PI * 2;
         }
         step(){
-          this.x += this.vx; 
-          this.y += this.vy; 
-          this.t += 0.04;
+          this.x += this.vx; this.y += this.vy; this.t += 0.05;
           if (this.y > canvas.height + 10 || this.x < -10 || this.x > canvas.width + 10) this.reset();
         }
         draw(){
-          const op = Math.max(0, Math.min(1, this.a + Math.sin(this.t)*0.25));
-          const g = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.r*2.8);
-          
+          const op = Math.max(0, Math.min(1, this.a + Math.sin(this.t)*0.2));
+          const g = ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.r*2.6);
           if (this.isEmerald) {
             g.addColorStop(0, `rgba(16, 185, 129, ${op})`);
             g.addColorStop(0.5,`rgba(6, 95, 70, ${op*0.7})`);
             g.addColorStop(1, `rgba(16, 185, 129, 0)`);
           } else {
-            g.addColorStop(0, `rgba(244, 228, 193, ${op})`);
-            g.addColorStop(0.5,`rgba(212, 175, 55, ${op*0.8})`);
-            g.addColorStop(1, `rgba(212, 175, 55, 0)`);
+            g.addColorStop(0, `rgba(244,228,193,${op})`);
+            g.addColorStop(0.5,`rgba(212,175,55,${op})`);
+            g.addColorStop(1, `rgba(212,175,55,0)`);
           }
-          
-          ctx.fillStyle=g; 
-          ctx.beginPath(); 
-          ctx.arc(this.x,this.y,this.r*2.4,0,Math.PI*2); 
-          ctx.fill();
+          ctx.fillStyle=g; ctx.beginPath(); ctx.arc(this.x,this.y,this.r*2.2,0,Math.PI*2); ctx.fill();
         }
       }
-      const particles = Array.from({length: 70}, ()=>new Particle(true));
+      const particles = Array.from({length: 60}, ()=>new Particle(true));
       (function loop(){
         ctx.clearRect(0,0,canvas.width,canvas.height);
         particles.forEach(p=>{ p.step(); p.draw(); });
