@@ -3,10 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>The Gold Blessing — Centered UI</title>
+<title>The Gold Blessing — Centered UI (Real Gem)</title>
 <style>
   :root{
-    /* Responsive sizing controls */
     --col-gap: clamp(48px, 7vw, 96px);
     --left-w: clamp(260px, 26vw, 360px);
     --btn-h: clamp(54px, 7.2vh, 68px);
@@ -19,9 +18,10 @@
     min-height:100vh;
     display:grid;
     place-items:center;
-    background: radial-gradient(1200px 600px at 60% 45%, rgba(255,255,255,.06) 0%, transparent 60%) , 
-                radial-gradient(800px 400px at 70% 55%, rgba(255,255,255,.03) 0%, transparent 60%) ,
-                linear-gradient(135deg,#0a0a0a 0%,#171717 100%);
+    background:
+      radial-gradient(1200px 600px at 60% 45%, rgba(255,255,255,.06) 0%, transparent 60%),
+      radial-gradient(800px 400px at 70% 55%, rgba(255,255,255,.03) 0%, transparent 60%),
+      linear-gradient(135deg,#0a0a0a 0%,#171717 100%);
     font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     color:#f5e9c9;
     overflow:hidden;
@@ -43,15 +43,13 @@
   /* ===== Left stack (equal-size buttons) ===== */
   .stack{
     width:100%;
-    display:flex;
-    flex-direction:column;
+    display:flex; flex-direction:column;
     gap: clamp(12px, 2.2vh, 18px);
   }
   .btn{
     height: var(--btn-h);
     width:100%;
-    border:none;
-    border-radius: var(--btn-radius);
+    border:none; border-radius: var(--btn-radius);
     cursor:pointer;
     display:flex; align-items:center; justify-content:center;
     gap:10px;
@@ -73,7 +71,6 @@
     filter: brightness(1.02);
   }
   .btn:active{ transform: translateY(0); }
-
   .emoji{ font-size:1.15em; line-height:0; display:inline-grid; place-items:center; }
 
   /* ===== Right side: ring + standing rotating diamond ===== */
@@ -94,16 +91,17 @@
     display:grid; place-items:center;
     pointer-events:none;
   }
-  .gem{
-    font-size: clamp(62px, 9vw, 110px);
-    transform: translateZ(0);
-    animation: gemSpin 6s linear infinite;
+  .gem-wrap{
+    width: clamp(62px, 9vw, 110px);
+    height: auto;
     transform-origin:center;
+    animation: gemSpin 6s linear infinite;
+    /* “standing” tilt */
+    transform: rotateX(12deg) rotateY(0deg);
     filter:
-      drop-shadow(0 0 18px rgba(0, 200, 255, .8))
-      drop-shadow(0 0 36px rgba(212,175,55,.4));
+      drop-shadow(0 0 18px rgba(0, 200, 255, .7))
+      drop-shadow(0 0 36px rgba(212,175,55,.35));
   }
-  /* “Standing” feel via constant slight tilt on X while spinning on Y */
   @keyframes gemSpin{
     0%   { transform: rotateX(12deg) rotateY(0deg); }
     50%  { transform: rotateX(12deg) rotateY(180deg); }
@@ -135,7 +133,7 @@
       <button class="btn"><span class="emoji">🌟</span> WHY CHOOSE LAYAWAY</button>
     </div>
 
-    <!-- RIGHT: rotating ring + standing, rotating diamond -->
+    <!-- RIGHT: rotating ring + standing, rotating gemstone SVG -->
     <div class="ring-wrap">
       <svg class="ring" viewBox="0 0 320 320" aria-hidden="true">
         <defs>
@@ -161,9 +159,73 @@
         </text>
       </svg>
 
-      <div class="diamond">
-        <!-- Use emoji for now; can swap to your PNG/SVG stone easily -->
-        <div class="gem" aria-hidden="true">💎</div>
+      <div class="diamond" aria-hidden="true">
+        <!-- === REAL GEMSTONE SVG (faceted crystal + glow + animated shine) === -->
+        <svg class="gem-wrap" viewBox="0 0 200 260">
+          <defs>
+            <!-- Facet color gradients -->
+            <linearGradient id="facetA" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#9be8ff"/>
+              <stop offset="1" stop-color="#3ec0ff"/>
+            </linearGradient>
+            <linearGradient id="facetB" x1="1" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#66d0ff"/>
+              <stop offset="1" stop-color="#0aa9ff"/>
+            </linearGradient>
+            <linearGradient id="facetC" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#c6f2ff"/>
+              <stop offset="1" stop-color="#6fd9ff"/>
+            </linearGradient>
+
+            <!-- Subtle outer glow -->
+            <filter id="gemGlow" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="b1"/>
+              <feColorMatrix in="b1" type="matrix"
+                values="0 0 0 0 0  0 0 0 0 0.7  0 0 0 0 1  0 0 0 0.6 0" result="c1"/>
+              <feMerge>
+                <feMergeNode in="c1"/><feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+
+            <!-- Shine mask sweeping vertically -->
+            <linearGradient id="shineGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="white" stop-opacity="0"/>
+              <stop offset="0.5" stop-color="white" stop-opacity="0.9"/>
+              <stop offset="1" stop-color="white" stop-opacity="0"/>
+            </linearGradient>
+            <mask id="shineMask">
+              <rect id="shineBand" x="-80" y="-10" width="60" height="280" fill="url(#shineGrad)">
+                <animate attributeName="x" values="-80;240" dur="2.8s" repeatCount="indefinite"/>
+              </rect>
+            </mask>
+          </defs>
+
+          <!-- Gem body (a tapered crystal) -->
+          <g filter="url(#gemGlow)">
+            <!-- Crown facets -->
+            <polygon points="100,10  50,45  75,80  125,80  150,45"
+                     fill="url(#facetA)"/>
+            <polygon points="50,45  30,90  75,80" fill="url(#facetB)"/>
+            <polygon points="150,45 170,90 125,80" fill="url(#facetB)"/>
+            <!-- Girdle -->
+            <polygon points="30,90  100,100  170,90 125,80 75,80"
+                     fill="url(#facetC)"/>
+            <!-- Pavilion facets (long taper) -->
+            <polygon points="30,90  100,250  100,100" fill="url(#facetA)"/>
+            <polygon points="170,90 100,250 100,100" fill="url(#facetB)"/>
+            <polygon points="30,90 100,250 170,90" fill="url(#facetC)" opacity="0.55"/>
+
+            <!-- Highlight rim -->
+            <polyline points="50,45 100,10 150,45 170,90" fill="none" stroke="#e7fbff" stroke-opacity=".85" stroke-width="2"/>
+          </g>
+
+          <!-- Animated shine sweep on top -->
+          <g mask="url(#shineMask)">
+            <polygon points="100,10  50,45  75,80  125,80  150,45" fill="#ffffff" opacity=".35"/>
+            <polygon points="30,90  100,100  170,90 125,80 75,80" fill="#ffffff" opacity=".18"/>
+            <polygon points="30,90 100,250 170,90" fill="#ffffff" opacity=".10"/>
+          </g>
+        </svg>
       </div>
     </div>
   </div>
