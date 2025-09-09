@@ -618,20 +618,12 @@
     /* Backdrop for mobile */
     const backdrop = document.getElementById('backdrop');
     const isMobile = window.innerWidth < 1024;
-    
-    /* Function to close all boxes */
-    function closeAllBoxes() {
-      document.querySelectorAll('.box').forEach(box => box.classList.remove('active'));
-      document.querySelectorAll('.toggle').forEach(btn => btn.style.display='inline-flex');
-      if(isMobile) backdrop.classList.remove('active');
-    }
 
     /* Open/close: Gold */
     const goldToggle = document.getElementById('goldToggle');
     const goldBox    = document.getElementById('goldBox');
     const goldClose  = document.getElementById('goldClose');
     goldToggle.addEventListener('click', ()=>{ 
-      closeAllBoxes(); // Close other boxes first
       goldBox.classList.add('active'); 
       if(isMobile) backdrop.classList.add('active');
       goldToggle.style.display='none'; 
@@ -647,7 +639,6 @@
     const layBox    = document.getElementById('layBox');
     const layClose  = document.getElementById('layClose');
     layToggle.addEventListener('click', ()=>{ 
-      closeAllBoxes(); // Close other boxes first
       layBox.classList.add('active'); 
       if(isMobile) backdrop.classList.add('active');
       layToggle.style.display='none'; 
@@ -663,7 +654,6 @@
     const termsBox    = document.getElementById('termsBox');
     const termsClose  = document.getElementById('termsClose');
     termsToggle.addEventListener('click', ()=>{ 
-      closeAllBoxes(); // Close other boxes first
       termsBox.classList.add('active'); 
       if(isMobile) backdrop.classList.add('active');
       termsToggle.style.display='none'; 
@@ -679,7 +669,6 @@
     const benefitsBox    = document.getElementById('benefitsBox');
     const benefitsClose  = document.getElementById('benefitsClose');
     benefitsToggle.addEventListener('click', ()=>{ 
-      closeAllBoxes(); // Close other boxes first
       benefitsBox.classList.add('active'); 
       if(isMobile) backdrop.classList.add('active');
       benefitsToggle.style.display='none'; 
@@ -690,9 +679,11 @@
       benefitsToggle.style.display='inline-flex'; 
     });
     
-    /* Close on backdrop click */
+    /* Close on backdrop click (mobile only) */
     backdrop.addEventListener('click', ()=>{
-      closeAllBoxes();
+      document.querySelectorAll('.box').forEach(box => box.classList.remove('active'));
+      document.querySelectorAll('.toggle').forEach(btn => btn.style.display='inline-flex');
+      backdrop.classList.remove('active');
     });
 
     /* ==== NEW GOLD CALCULATOR LOGIC ==== */
